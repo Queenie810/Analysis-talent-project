@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分析岗人选 Tracking 看板</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --red: #FF2442;
+    --orange: #FF6B35;
+    --green: #10B981;
+    --yellow: #F59E0B;
+    --blue: #3B82F6;
+    --purple: #8B5CF6;
+    --gray: #6B7280;
+    --bg: #F7F5F2;
+    --white: #FFFFFF;
+    --border: #E5E7EB;
+    --text: #111827;
+    --text-muted: #6B7280;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Inter', 'PingFang SC', sans-serif;
+    color: var(--text);
+    font-size: 13px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, #FF2442 0%, #FF6B35 55%, #FFB800 100%);
+    padding: 28px 32px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .header-left h1 {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .header-left p {
+    color: rgba(255,255,255,0.85);
+    font-size: 12.5px;
+  }
+
+  .header-stats {
+    display: flex;
+    gap: 12px;
+  }
+
+  .hstat {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 12px;
+    padding: 12px 18px;
+    text-align: center;
+    min-width: 76px;
+  }
+
+  .hstat-num {
+    font-size: 26px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .hstat-label {
+    color: rgba(255,255,255,0.8);
+    font-size: 10.5px;
+    margin-top: 3px;
+    font-weight: 600;
+  }
+
+  /* ── TOOLBAR ── */
+  .toolbar {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .filter-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  select, input[type="text"] {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 12.5px;
+    font-family: inherit;
+    color: var(--text);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.15s;
+    height: 32px;
+  }
+
+  select:focus, input[type="text"]:focus {
+    border-color: var(--red);
+  }
+
+  .search-input {
+    width: 200px;
+  }
+
+  .btn {
+    height: 32px;
+    padding: 0 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--red);
+    color: #fff;
+  }
+  .btn-primary:hover { background: #e01f3a; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { background: var(--bg); color: var(--text); }
+
+  .btn-green {
+    background: var(--green);
+    color: #fff;
+  }
+  .btn-green:hover { background: #0ea271; }
+
+  .toolbar-right {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .saved-hint {
+    font-size: 11px;
+    color: var(--green);
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .saved-hint.show { opacity: 1; }
+
+  /* ── TABLE WRAPPER ── */
+  .table-wrapper {
+    padding: 20px 32px 60px;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    min-width: 1100px;
+  }
+
+  thead tr {
+    background: #F9FAFB;
+    border-bottom: 2px solid var(--border);
+  }
+
+  th {
+    padding: 11px 12px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  th:hover { color: var(--red); }
+
+  th.sort-asc::after { content: ' ↑'; color: var(--red); }
+  th.sort-desc::after { content: ' ↓'; color: var(--red); }
+
+  tbody tr {
+    border-bottom: 1px solid #F3F4F6;
+    transition: background 0.1s;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #FFFBF9; }
+
+  td {
+    padding: 10px 12px;
+    vertical-align: middle;
+    max-width: 200px;
+  }
+
+  /* ── STATUS BADGES ── */
+  .status-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .status-offer    { background: #D1FAE5; color: #065F46; }
+  .status-hrbp     { background: #DBEAFE; color: #1E40AF; }
+  .status-pending  { background: #FEF3C7; color: #92400E; }
+  .status-waiting  { background: #EDE9FE; color: #5B21B6; }
+  .status-fail     { background: #FEE2E2; color: #991B1B; }
+  .status-reject   { background: #F3F4F6; color: #4B5563; }
+  .status-default  { background: #F3F4F6; color: #4B5563; }
+
+  /* ── INTERVIEW DOTS ── */
+  .dot {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 22px;
+  }
+
+  .dot-pass   { background: #D1FAE5; color: #065F46; }
+  .dot-fail   { background: #FEE2E2; color: #991B1B; }
+  .dot-empty  { background: #F3F4F6; color: #D1D5DB; }
+
+  /* ── EDITABLE CELLS ── */
+  .editable {
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 3px 6px;
+    min-width: 60px;
+    display: inline-block;
+    transition: background 0.15s;
+  }
+  .editable:hover { background: #FFF0EB; outline: 1px solid var(--orange); }
+  .editable:focus { background: #FFF0EB; outline: 2px solid var(--red); }
+
+  /* ── ADD ROW BUTTON ── */
+  .add-row-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 20px;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border-top: 1px dashed var(--border);
+    transition: all 0.15s;
+    background: transparent;
+    width: 100%;
+    border-radius: 0 0 14px 14px;
+  }
+  .add-row-btn:hover { background: #FFF8F5; color: var(--red); }
+
+  /* ── TA TAG ── */
+  .ta-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: #F3F4F6;
+    color: #374151;
+    white-space: nowrap;
+  }
+
+  .ta-云阳 { background: #DBEAFE; color: #1E40AF; }
+  .ta-玄鸟 { background: #D1FAE5; color: #065F46; }
+  .ta-车英 { background: #FEF3C7; color: #92400E; }
+  .ta-粥粥 { background: #EDE9FE; color: #5B21B6; }
+  .ta-程曦 { background: #FCE7F3; color: #831843; }
+
+  /* ── WEEK TAG ── */
+  .week-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: #F3F4F6;
+    color: #6B7280;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.show { display: flex; }
+
+  .modal {
+    background: var(--white);
+    border-radius: 18px;
+    padding: 28px 32px;
+    width: 540px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  }
+
+  .modal h2 {
+    font-size: 17px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .form-field.full { grid-column: 1 / -1; }
+
+  .form-field label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--text);
+    outline: none;
+    width: 100%;
+    height: auto;
+  }
+
+  .form-field textarea { height: 72px; resize: vertical; }
+
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus { border-color: var(--red); }
+
+  .modal-footer {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+  }
+
+  .empty-state .emoji { font-size: 40px; margin-bottom: 12px; }
+
+  /* ── COUNT BADGE ── */
+  .count-badge {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 10px;
+    margin-left: 6px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1>📊 分析岗人选 Tracking 看板</h1>
+    <p>在线编辑 · 自动保存 · 刷新不丢失 &nbsp;·&nbsp; 数据存储在本地浏览器</p>
+  </div>
+  <div class="header-stats" id="headerStats"></div>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div class="filter-group">
+    <span class="filter-label">🔍</span>
+    <input type="text" class="search-input" id="searchInput" placeholder="搜索姓名 / 公司 / 备注..." oninput="applyFilters()">
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">状态</span>
+    <select id="filterStatus" onchange="applyFilters()">
+      <option value="">全部</option>
+      <option>待TA面试</option>
+      <option>HRBP面试</option>
+      <option>待观影</option>
+      <option>观影fail</option>
+      <option>offer沟通中</option>
+      <option>TA面试fail</option>
+      <option>人选拒绝</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">TA</span>
+    <select id="filterTA" onchange="applyFilters()">
+      <option value="">全部</option>
+      <option>云阳</option>
+      <option>玄鸟</option>
+      <option>车英</option>
+      <option>粥粥</option>
+      <option>程曦</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">周期</span>
+    <select id="filterWeek" onchange="applyFilters()">
+      <option value="">全部</option>
+      <option>W1</option>
+      <option>W2</option>
+      <option>W3</option>
+    </select>
+  </div>
+  <button class="btn btn-ghost" onclick="resetFilters()">重置</button>
+
+  <div class="toolbar-right">
+    <span class="saved-hint" id="savedHint">✓ 已保存</span>
+    <button class="btn btn-green" onclick="showAddModal()">＋ 新增人选</button>
+    <button class="btn btn-ghost" onclick="exportCSV()">⬇ 导出 CSV</button>
+  </div>
+</div>
+
+<!-- TABLE -->
+<div class="table-wrapper">
+  <table id="mainTable">
+    <thead>
+      <tr>
+        <th onclick="sortBy('week')" style="width:54px">周期</th>
+        <th onclick="sortBy('name')" style="width:90px">姓名</th>
+        <th onclick="sortBy('level')" style="width:54px">层级</th>
+        <th onclick="sortBy('company')" style="width:80px">公司</th>
+        <th style="width:52px">出生年</th>
+        <th onclick="sortBy('ta')" style="width:64px">TA</th>
+        <th onclick="sortBy('status')" style="width:130px">状态</th>
+        <th style="width:50px" title="TA面试">TA面</th>
+        <th style="width:50px" title="曼巴&兰时观影">观影</th>
+        <th style="width:50px" title="HRBP面试">HRBP</th>
+        <th style="width:50px" title="L1/L2面试">L1/L2</th>
+        <th style="width:130px">岗位方向</th>
+        <th>备注</th>
+        <th style="width:54px">操作</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+  <button class="add-row-btn" onclick="showAddModal()">＋ 新增人选</button>
+</div>
+
+<!-- ADD/EDIT MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
+  <div class="modal">
+    <h2 id="modalTitle">✏️ 新增人选</h2>
+    <div class="form-grid">
+      <div class="form-field">
+        <label>周期</label>
+        <select id="f_week">
+          <option>W1</option><option>W2</option><option>W3</option>
+          <option>W4</option><option>W5</option><option>W6</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>姓名</label>
+        <input type="text" id="f_name" placeholder="候选人姓名">
+      </div>
+      <div class="form-field">
+        <label>层级</label>
+        <select id="f_level">
+          <option>IC</option><option>L1</option><option>L2</option><option>IC/L1</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>公司</label>
+        <input type="text" id="f_company" placeholder="当前公司">
+      </div>
+      <div class="form-field">
+        <label>出生年</label>
+        <input type="text" id="f_birth_year" placeholder="如 1999">
+      </div>
+      <div class="form-field">
+        <label>TA</label>
+        <select id="f_ta">
+          <option>云阳</option><option>玄鸟</option><option>车英</option>
+          <option>粥粥</option><option>程曦</option>
+        </select>
+      </div>
+      <div class="form-field full">
+        <label>状态</label>
+        <select id="f_status">
+          <option>待TA面试</option>
+          <option>TA面试fail</option>
+          <option>待观影</option>
+          <option>观影fail</option>
+          <option>HRBP面试</option>
+          <option>offer沟通中</option>
+          <option>人选拒绝</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>TA面试</label>
+        <select id="f_ta_interview">
+          <option value="">-</option><option>pass</option><option>fail</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>曼巴&兰时观影</label>
+        <select id="f_screening">
+          <option value="">-</option><option>pass</option><option>fail</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>HRBP面试</label>
+        <select id="f_hrbp_interview">
+          <option value="">-</option><option>pass</option><option>fail</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>L1/L2面试</label>
+        <select id="f_l1l2_interview">
+          <option value="">-</option><option>pass</option><option>fail</option>
+        </select>
+      </div>
+      <div class="form-field full">
+        <label>岗位方向</label>
+        <input type="text" id="f_position" placeholder="如 财分-fp&a-潇潇 / open">
+      </div>
+      <div class="form-field full">
+        <label>人才类型</label>
+        <input type="text" id="f_talent_type" placeholder="如 投资+美团keeta">
+      </div>
+      <div class="form-field full">
+        <label>备注</label>
+        <textarea id="f_remark" placeholder="学校背景、经历等"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal()">取消</button>
+      <button class="btn btn-primary" onclick="saveModal()">保存</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── 原始数据（Excel 导入）──
+const SEED_DATA = [
+  {"week":"W1","name":"巩婕","level":"IC","position":"open","status":"TA面试fail","ta_interview":"","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"百度","birth_year":"1996","remark":"北大，百度商分","ta":"玄鸟"},
+  {"week":"W1","name":"李玉娇","level":"IC","position":"策略中台 -经分- 仪玄","status":"offer沟通中","ta_interview":"pass","screening":"pass","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"腾讯","birth_year":"1999","remark":"清华，腾讯商分","ta":"玄鸟"},
+  {"week":"W1","name":"陈晓滨","level":"IC","position":"open","status":"待观影","ta_interview":"","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"1996","remark":"南大，美团商分","ta":"玄鸟"},
+  {"week":"W1","name":"左正浩","level":"IC","position":"财分-fp&a-潇潇","status":"offer沟通中","ta_interview":"pass","screening":"pass","hrbp_interview":"","l1l2_interview":"pass","talent_type":"投资+美团keeta+美团本地","company":"滴滴","birth_year":"1999","remark":"北大+芝加哥，滴滴战略分析","ta":"粥粥"},
+  {"week":"W1","name":"刘欣然","level":"IC","position":"open","status":"待观影","ta_interview":"pass","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"百度","birth_year":"2000","remark":"哥伦比亚，百度战略分析","ta":"粥粥"},
+  {"week":"W1","name":"张辰悦","level":"IC","position":"策略中台 - 经分 - 汇报绯夏","status":"人选拒绝","ta_interview":"pass","screening":"pass","hrbp_interview":"pass","l1l2_interview":"pass","talent_type":"投资+美团keeta+美团本地","company":"美团","birth_year":"2000","remark":"复旦+复旦，美团商分","ta":"车英"},
+  {"week":"W1","name":"Ashley - Confidential","level":"L2","position":"分析or业务","status":"HRBP面试","ta_interview":"pass","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"1990","remark":"清华，巴克莱 - 美团商分","ta":"云阳"},
+  {"week":"W1","name":"任志勇","level":"L1","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"1989","remark":"天大南开，美团","ta":"云阳"},
+  {"week":"W1","name":"沈圆圆","level":"IC","position":"open","status":"待观影","ta_interview":"","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"1999","remark":"上财 - 清华，美团商分","ta":"云阳"},
+  {"week":"W1","name":"杨逸嘉","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"1998","remark":"ASU - 美团商分","ta":"云阳"},
+  {"week":"W1","name":"陈增琦","level":"IC","position":"open","status":"观影fail","ta_interview":"pass","screening":"fail","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"平安","birth_year":"2001","remark":"人大-波士顿，平安总部经分","ta":"程曦"},
+  {"week":"W2","name":"汪清岚","level":"IC","position":"open","status":"待观影","ta_interview":"pass","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"2000","remark":"对外经贸，美团商分","ta":"玄鸟"},
+  {"week":"W2","name":"李廷宇","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"安可创新","birth_year":"2000","remark":"深圳大学+新南威尔士硕，安可创新数分","ta":"粥粥"},
+  {"week":"W2","name":"李孟达","level":"IC","position":"open","status":"人选拒绝","ta_interview":"","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"倍嵘资本","birth_year":"2000","remark":"清华本硕，倍嵘资本投资分析","ta":"粥粥"},
+  {"week":"W2","name":"孙珺哲","level":"IC","position":"open","status":"人选拒绝","ta_interview":"","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"中银","birth_year":"1999","remark":"康奈尔本硕","ta":"粥粥"},
+  {"week":"W2","name":"詹淳霖","level":"IC","position":"open","status":"人选拒绝","ta_interview":"","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"摩根大通","birth_year":"2000","remark":"港大，摩根大通投资分析","ta":"粥粥"},
+  {"week":"W2","name":"樊佳颖","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"2001","remark":"重庆大学-哥伦比亚硕，美团商分","ta":"程曦"},
+  {"week":"W2","name":"王译晗","level":"IC","position":"open","status":"待观影","ta_interview":"pass","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"微众银行","birth_year":"1998","remark":"天大-清华，微众银行数分","ta":"程曦"},
+  {"week":"W2","name":"孙绮卉","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"久谦咨询","birth_year":"1997","remark":"加州大学本+哥伦比亚硕，九谦咨询","ta":"程曦"},
+  {"week":"W2","name":"张净沿","level":"IC","position":"open","status":"待观影","ta_interview":"pass","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"蚂蚁","birth_year":"1999","remark":"川大本，滴滴+蚂蚁数分","ta":"程曦"},
+  {"week":"W2","name":"段语轩","level":"IC","position":"open","status":"待观影","ta_interview":"pass","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"2001","remark":"复旦+港大，美团商分","ta":"车英"},
+  {"week":"W2","name":"董乐斌","level":"IC","position":"open","status":"待观影","ta_interview":"pass","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"BCG","birth_year":"2000","remark":"人大+清华，BCG","ta":"车英"},
+  {"week":"W3","name":"刘思迪","level":"IC","position":"open","status":"待观影","ta_interview":"pass","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"字节","birth_year":"1998","remark":"Emory+Emory，字节","ta":"车英"},
+  {"week":"W3","name":"吕晗旗","level":"IC","position":"open","status":"待观影","ta_interview":"pass","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"1999","remark":"Berkeley+Columbia，美团","ta":"车英"},
+  {"week":"W3","name":"王艺涵","level":"IC","position":"open","status":"待观影","ta_interview":"pass","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"1999","remark":"北大+UCL，美团","ta":"车英"},
+  {"week":"W2","name":"张瑾瑜","level":"IC","position":"open","status":"待TA面试","ta_interview":"","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"中金","birth_year":"1998","remark":"复旦+LSE，中金","ta":"车英"},
+  {"week":"W3","name":"刘祖瑞","level":"IC","position":"open","status":"待TA面试","ta_interview":"","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"2000","remark":"清华，美团","ta":"车英"},
+  {"week":"W2","name":"杨明烜","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"Amgen","birth_year":"2000","remark":"同济+Brown，Amgen","ta":"车英"},
+  {"week":"W2","name":"王悦","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"华夏久盈","birth_year":"2001","remark":"央财+耶鲁，华夏久盈","ta":"车英"},
+  {"week":"W2","name":"郝天一","level":"IC","position":"open","status":"待观影","ta_interview":"pass","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"国开金融","birth_year":"1997","remark":"北航，清华 - 国开金融VC","ta":"云阳"},
+  {"week":"W3","name":"曹妍","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"1998","remark":"山大+港中深，美团","ta":"车英"},
+  {"week":"W3","name":"郭乐嘉","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"锴明投资","birth_year":"2000","remark":"清华+LSE，锴明投资","ta":"车英"},
+  {"week":"W3","name":"张夕瑶","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"蚂蚁","birth_year":"1999","remark":"中山+复旦，蚂蚁","ta":"车英"},
+  {"week":"W3","name":"李奕辰","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"滴滴","birth_year":"1998","remark":"西安交大+JHU+UPenn，滴滴","ta":"车英"},
+  {"week":"W3","name":"黄海昀","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"摩根大通","birth_year":"1998","remark":"交大+交大，摩根大通","ta":"车英"},
+  {"week":"W3","name":"易家阳","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"阿里云","birth_year":"2000","remark":"上财本硕","ta":"程曦"},
+  {"week":"W3","name":"伍嘉祺","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"滴滴","birth_year":"2001","remark":"哥大+NYU","ta":"程曦"},
+  {"week":"W3","name":"王艳影","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"2000","remark":"中国海洋大学+华盛顿","ta":"程曦"},
+  {"week":"W3","name":"隆军德","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"东方财富证券","birth_year":"1999","remark":"华科+新国立","ta":"程曦"},
+  {"week":"W3","name":"殷子彧","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"阿里云","birth_year":"2000","remark":"华科+交大","ta":"程曦"},
+  {"week":"W3","name":"岳晓娟","level":"IC","position":"open","status":"待TA面试","ta_interview":"","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"阿里","birth_year":"1997","remark":"华南理工+中南财","ta":"程曦"},
+  {"week":"W3","name":"许寒初","level":"IC/L1","position":"open","status":"待TA面试","ta_interview":"","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"久谦+欢聚时代","birth_year":"1996","remark":"交大","ta":"程曦"},
+  {"week":"W3","name":"张珈启","level":"IC","position":"open","status":"待观影","ta_interview":"pass","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"SHEIN","birth_year":"1998","remark":"南开+北大","ta":"粥粥"},
+  {"week":"W3","name":"戴丽娜","level":"IC","position":"open","status":"待TA面试","ta_interview":"","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"1998","remark":"浙大+人大","ta":"粥粥"},
+  {"week":"W3","name":"王艺","level":"IC","position":"open","status":"待观影","ta_interview":"pass","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"1998","remark":"广州大学+曼彻斯特","ta":"粥粥"},
+  {"week":"W3","name":"任丛","level":"L1","position":"分析or solution","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"翊翎+泰和+品牌方","birth_year":"1993","remark":"对外经贸本硕+巴黎高商","ta":"粥粥"},
+  {"week":"W3","name":"朱凯成","level":"IC","position":"open","status":"待TA面试","ta_interview":"","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"2001","remark":"央财+港大","ta":"粥粥"},
+  {"week":"W3","name":"胡雪岚","level":"IC","position":"open","status":"TA面试fail","ta_interview":"fail","screening":"","hrbp_interview":"","l1l2_interview":"","talent_type":"","company":"美团","birth_year":"2001","remark":"杜伦+香港科技","ta":"粥粥"}
+];
+
+const STORAGE_KEY = 'analysis_tracking_v2';
+let data = [];
+let editingId = null;
+let sortCol = 'week';
+let sortDir = 1;
+let filteredData = [];
+
+// ── 初始化 ──
+function init() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    try {
+      data = JSON.parse(saved);
+    } catch(e) {
+      data = SEED_DATA.map((d,i) => ({...d, id: i}));
+    }
+  } else {
+    data = SEED_DATA.map((d,i) => ({...d, id: i}));
+    save();
+  }
+  applyFilters();
+}
+
+function save() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  const hint = document.getElementById('savedHint');
+  hint.classList.add('show');
+  setTimeout(() => hint.classList.remove('show'), 1800);
+}
+
+// ── 状态样式 ──
+function statusClass(s) {
+  if (!s) return 'status-default';
+  if (s.includes('offer')) return 'status-offer';
+  if (s.includes('HRBP')) return 'status-hrbp';
+  if (s.includes('待') && s.includes('观影')) return 'status-waiting';
+  if (s.includes('待')) return 'status-pending';
+  if (s.includes('fail') || s.includes('拒绝')) return 'status-fail';
+  return 'status-default';
+}
+
+function dotHtml(v) {
+  if (v === 'pass') return `<span class="dot dot-pass">✓</span>`;
+  if (v === 'fail') return `<span class="dot dot-fail">✗</span>`;
+  return `<span class="dot dot-empty">·</span>`;
+}
+
+// ── 渲染表格 ──
+function render(rows) {
+  const tbody = document.getElementById('tableBody');
+  if (!rows.length) {
+    tbody.innerHTML = `<tr><td colspan="14"><div class="empty-state"><div class="emoji">🔍</div><div>没有找到匹配的人选</div></div></td></tr>`;
+    updateStats([]);
+    return;
+  }
+
+  tbody.innerHTML = rows.map(r => `
+    <tr data-id="${r.id}">
+      <td><span class="week-tag">${esc(r.week)}</span></td>
+      <td><strong>${esc(r.name)}</strong></td>
+      <td><span style="font-size:11px;font-weight:600;color:#555">${esc(r.level)}</span></td>
+      <td>${esc(r.company)}</td>
+      <td style="color:var(--text-muted);font-size:12px">${esc(r.birth_year)}</td>
+      <td><span class="ta-tag ta-${esc(r.ta)}">${esc(r.ta)}</span></td>
+      <td><span class="status-badge ${statusClass(r.status)}">${esc(r.status)}</span></td>
+      <td style="text-align:center">${dotHtml(r.ta_interview)}</td>
+      <td style="text-align:center">${dotHtml(r.screening)}</td>
+      <td style="text-align:center">${dotHtml(r.hrbp_interview)}</td>
+      <td style="text-align:center">${dotHtml(r.l1l2_interview)}</td>
+      <td style="font-size:12px;color:var(--text-muted)">${esc(r.position === 'open' ? '' : r.position)}</td>
+      <td style="font-size:12px;color:var(--text-muted);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(r.remark)}">${esc(r.remark)}</td>
+      <td>
+        <button onclick="editRow(${r.id})" style="background:none;border:none;cursor:pointer;font-size:13px;padding:4px 6px;border-radius:6px;color:var(--text-muted)" title="编辑">✏️</button>
+        <button onclick="deleteRow(${r.id})" style="background:none;border:none;cursor:pointer;font-size:13px;padding:4px 6px;border-radius:6px;color:var(--text-muted)" title="删除">🗑️</button>
+      </td>
+    </tr>
+  `).join('');
+
+  updateStats(rows);
+}
+
+function updateStats(rows) {
+  const total = data.length;
+  const active = data.filter(r => !r.status.includes('fail') && !r.status.includes('拒绝')).length;
+  const pending = data.filter(r => r.status.includes('待观影') || r.status.includes('待TA')).length;
+  const offer = data.filter(r => r.status.includes('offer')).length;
+  const fail = data.filter(r => r.status.includes('fail') || r.status.includes('拒绝')).length;
+
+  document.getElementById('headerStats').innerHTML = `
+    <div class="hstat"><div class="hstat-num">${total}</div><div class="hstat-label">总人数</div></div>
+    <div class="hstat"><div class="hstat-num">${pending}</div><div class="hstat-label">待推进</div></div>
+    <div class="hstat"><div class="hstat-num">${offer}</div><div class="hstat-label">Offer中</div></div>
+    <div class="hstat"><div class="hstat-num">${fail}</div><div class="hstat-label">未通过</div></div>
+  `;
+}
+
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── 过滤 & 排序 ──
+function applyFilters() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const status = document.getElementById('filterStatus').value;
+  const ta = document.getElementById('filterTA').value;
+  const week = document.getElementById('filterWeek').value;
+
+  filteredData = data.filter(r => {
+    if (search && !`${r.name}${r.company}${r.remark}${r.position}`.toLowerCase().includes(search)) return false;
+    if (status && r.status !== status) return false;
+    if (ta && r.ta !== ta) return false;
+    if (week && r.week !== week) return false;
+    return true;
+  });
+
+  filteredData.sort((a, b) => {
+    let av = a[sortCol] || '', bv = b[sortCol] || '';
+    return sortDir * av.localeCompare(bv, 'zh');
+  });
+
+  render(filteredData);
+}
+
+function resetFilters() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('filterStatus').value = '';
+  document.getElementById('filterTA').value = '';
+  document.getElementById('filterWeek').value = '';
+  applyFilters();
+}
+
+function sortBy(col) {
+  if (sortCol === col) sortDir *= -1;
+  else { sortCol = col; sortDir = 1; }
+  document.querySelectorAll('th').forEach(th => th.classList.remove('sort-asc','sort-desc'));
+  const thMap = {week:0,name:1,level:2,company:3,ta:5,status:6};
+  const idx = thMap[col];
+  if (idx !== undefined) {
+    const ths = document.querySelectorAll('th');
+    ths[idx].classList.add(sortDir === 1 ? 'sort-asc' : 'sort-desc');
+  }
+  applyFilters();
+}
+
+// ── MODAL ──
+function showAddModal() {
+  editingId = null;
+  document.getElementById('modalTitle').textContent = '✏️ 新增人选';
+  clearForm();
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+function editRow(id) {
+  const r = data.find(d => d.id === id);
+  if (!r) return;
+  editingId = id;
+  document.getElementById('modalTitle').textContent = `✏️ 编辑 · ${r.name}`;
+  document.getElementById('f_week').value = r.week;
+  document.getElementById('f_name').value = r.name;
+  document.getElementById('f_level').value = r.level;
+  document.getElementById('f_company').value = r.company;
+  document.getElementById('f_birth_year').value = r.birth_year;
+  document.getElementById('f_ta').value = r.ta;
+  document.getElementById('f_status').value = r.status;
+  document.getElementById('f_ta_interview').value = r.ta_interview;
+  document.getElementById('f_screening').value = r.screening;
+  document.getElementById('f_hrbp_interview').value = r.hrbp_interview;
+  document.getElementById('f_l1l2_interview').value = r.l1l2_interview;
+  document.getElementById('f_position').value = r.position;
+  document.getElementById('f_talent_type').value = r.talent_type;
+  document.getElementById('f_remark').value = r.remark;
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+function deleteRow(id) {
+  if (!confirm('确认删除这条人选记录？')) return;
+  data = data.filter(d => d.id !== id);
+  save();
+  applyFilters();
+}
+
+function clearForm() {
+  ['f_week','f_name','f_level','f_company','f_birth_year','f_ta','f_status',
+   'f_ta_interview','f_screening','f_hrbp_interview','f_l1l2_interview',
+   'f_position','f_talent_type','f_remark'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el.tagName === 'SELECT') el.selectedIndex = 0;
+    else el.value = '';
+  });
+}
+
+function saveModal() {
+  const name = document.getElementById('f_name').value.trim();
+  if (!name) { alert('请填写姓名'); return; }
+
+  const row = {
+    id: editingId !== null ? editingId : Date.now(),
+    week: document.getElementById('f_week').value,
+    name,
+    level: document.getElementById('f_level').value,
+    company: document.getElementById('f_company').value,
+    birth_year: document.getElementById('f_birth_year').value,
+    ta: document.getElementById('f_ta').value,
+    status: document.getElementById('f_status').value,
+    ta_interview: document.getElementById('f_ta_interview').value,
+    screening: document.getElementById('f_screening').value,
+    hrbp_interview: document.getElementById('f_hrbp_interview').value,
+    l1l2_interview: document.getElementById('f_l1l2_interview').value,
+    position: document.getElementById('f_position').value || 'open',
+    talent_type: document.getElementById('f_talent_type').value,
+    remark: document.getElementById('f_remark').value,
+  };
+
+  if (editingId !== null) {
+    const idx = data.findIndex(d => d.id === editingId);
+    if (idx !== -1) data[idx] = row;
+  } else {
+    data.push(row);
+  }
+
+  save();
+  closeModal();
+  applyFilters();
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('show');
+  editingId = null;
+}
+
+function closeModalOnBg(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+// ── 导出 CSV ──
+function exportCSV() {
+  const headers = ['周期','姓名','层级','公司','出生年','TA','状态','TA面试','观影','HRBP面试','L1/L2','岗位方向','备注'];
+  const rows = filteredData.length ? filteredData : data;
+  const lines = [headers.join(',')];
+  rows.forEach(r => {
+    lines.push([r.week,r.name,r.level,r.company,r.birth_year,r.ta,r.status,
+      r.ta_interview,r.screening,r.hrbp_interview,r.l1l2_interview,
+      r.position,r.remark].map(v => `"${(v||'').replace(/"/g,'""')}"`).join(','));
+  });
+  const blob = new Blob(['\uFEFF'+lines.join('\n')], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `分析岗人选tracking_${new Date().toLocaleDateString('zh')}.csv`;
+  a.click();
+}
+
+init();
+</script>
+</body>
+</html>
