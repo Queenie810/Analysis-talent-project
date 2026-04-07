@@ -655,124 +655,57 @@
     <div class="grid-2">
       <!-- 考核目标 -->
       <div class="card">
-        <div class="card-header">
+        <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
           <div class="card-title">🎯 考核目标</div>
-        </div>
-        <div class="card-body">
-          <div class="goal-item">
-            <div class="goal-num">10</div>
-            <div class="goal-desc">
-              <strong>结果目标：每人每双月 10 个 Offer</strong>
-              <span>3 位 TA 全力推进，双月共交付 30 个有效 Offer</span>
-            </div>
-          </div>
-          <div class="goal-item">
-            <div class="goal-num">≥2</div>
-            <div class="goal-desc">
-              <strong>过程目标：每周 ≥2 人进阅影专场</strong>
-              <span>保持稳定的人选供给节奏，周度复盘进展</span>
-            </div>
-          </div>
-          <div class="goal-item">
-            <div class="goal-num">30</div>
-            <div class="goal-desc">
-              <strong>专项总目标：30 个分析背景人选</strong>
-              <span>覆盖财务职能 11 个 + 中台经分 16 个缺口</span>
-            </div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <span id="ov_goal_saved" style="font-size:11px;color:#10B981;font-weight:600;opacity:0;transition:opacity 0.3s;">✓ 已保存</span>
+            <button onclick="ovGoalShowAdd()" style="height:28px;padding:0 12px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;border:none;background:#FF2442;color:#fff;">＋ 新增</button>
           </div>
         </div>
+        <div class="card-body" id="ov_goal_list"></div>
       </div>
 
       <!-- 候选人画像 -->
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">👤 候选人画像</div>
-          <span style="font-size:11px;color:#bbb;">跳出财分框架，看数分/商分/分析师</span>
-        </div>
-        <div class="card-body">
-          <div class="profile-item">
-            <div class="profile-icon">🚀</div>
-            <div class="profile-text">
-              <strong>创业范</strong>
-              <span>一人成军，扛得住压力，主动推事情落地</span>
-            </div>
+        <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+          <div>
+            <div class="card-title">👤 候选人画像</div>
+            <span style="font-size:11px;color:#bbb;">跳出财分框架，看数分/商分/分析师</span>
           </div>
-          <div class="profile-item">
-            <div class="profile-icon">📐</div>
-            <div class="profile-text">
-              <strong>专业 × 经历交叉</strong>
-              <span>理科背景（计算机/统计/数学/经济）+ 投行/量化/商业分析经历</span>
-            </div>
-          </div>
-          <div class="profile-item">
-            <div class="profile-icon">🤖</div>
-            <div class="profile-text">
-              <strong>真实拥抱 AI</strong>
-              <span>有 before/after 案例，能举具体场景，而非只会说模型名字</span>
-            </div>
-          </div>
-          <div class="profile-item">
-            <div class="profile-icon">⚡</div>
-            <div class="profile-text">
-              <strong>年轻高潜</strong>
-              <span>工作 2-3 年，跳出传统财分框架，看数分/商分/分析师方向</span>
-            </div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <span id="ov_prof_saved" style="font-size:11px;color:#10B981;font-weight:600;opacity:0;transition:opacity 0.3s;">✓ 已保存</span>
+            <button onclick="ovProfShowAdd()" style="height:28px;padding:0 12px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;border:none;background:#FF2442;color:#fff;">＋ 新增</button>
           </div>
         </div>
+        <div class="card-body" id="ov_prof_list"></div>
       </div>
     </div>
 
     <!-- 面试流程 -->
     <div class="card section-gap">
-      <div class="card-header">
+      <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
         <div class="card-title">📋 面试流程</div>
+        <button onclick="ovFlowEdit()" style="height:28px;padding:0 12px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;border:none;background:#FF6B35;color:#fff;">✏️ 编辑流程</button>
       </div>
       <div class="card-body">
-        <div class="flow-steps">
-          <div class="flow-step">TA Sourcing<br>& Screening</div>
-          <div class="flow-arrow">›</div>
-          <div class="flow-step">HRBP<br>吸引</div>
-          <div class="flow-arrow">›</div>
-          <div class="flow-step">阅影<br>专场</div>
-          <div class="flow-arrow">›</div>
-          <div class="flow-step">定向<br>分配</div>
-          <div class="flow-arrow">›</div>
-          <div class="flow-step">Offer</div>
-          <div class="flow-arrow">›</div>
-          <div class="flow-step">入职</div>
-        </div>
+        <div class="flow-steps" id="ov_flow_steps"></div>
       </div>
     </div>
 
     <!-- 4 类可沉淀资产 -->
     <div class="card">
-      <div class="card-header">
-        <div class="card-title">💼 加入后能沉淀的 4 类资产</div>
-        <span style="font-size:11px;color:#bbb;">这是你在项目里真正能带走的东西</span>
+      <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+        <div>
+          <div class="card-title">💼 加入后能沉淀的资产</div>
+          <span style="font-size:11px;color:#bbb;">这是你在项目里真正能带走的东西</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span id="ov_asset_saved" style="font-size:11px;color:#10B981;font-weight:600;opacity:0;transition:opacity 0.3s;">✓ 已保存</span>
+          <button onclick="ovAssetShowAdd()" style="height:28px;padding:0 12px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;border:none;background:#FF2442;color:#fff;">＋ 新增</button>
+        </div>
       </div>
       <div class="card-body">
-        <div class="grid-4" style="margin-bottom:0">
-          <div class="output-item">
-            <span class="output-emoji">🗺️</span>
-            <div class="output-name">分析人才 Mapping 资料</div>
-            <div class="output-desc">目标公司 × 目标岗位的系统性人才地图，持续更新</div>
-          </div>
-          <div class="output-item">
-            <span class="output-emoji">📚</span>
-            <div class="output-name">高阶候选人资料库</div>
-            <div class="output-desc">有质量的 Tough List，覆盖 MBB、美团、字节等核心来源</div>
-          </div>
-          <div class="output-item">
-            <span class="output-emoji">💬</span>
-            <div class="output-name">有效面试交互资料</div>
-            <div class="output-desc">经过验证的 sourcing 话术、screening 问题、HRBP 吸引脚本</div>
-          </div>
-          <div class="output-item">
-            <span class="output-emoji">⚙️</span>
-            <div class="output-name">可提效的分析 AI 产品</div>
-            <div class="output-desc">探索 AI sourcing 工具的实际应用，沉淀可复用的 AI 工作流</div>
-          </div>
-        </div>
+        <div class="grid-4" id="ov_asset_list" style="margin-bottom:0"></div>
       </div>
     </div>
 
@@ -784,89 +717,41 @@
 
       <!-- 财务职能 -->
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">💼 财务职能方向</div>
-          <span class="count-pill">共 11 个需求</span>
+        <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+          <div>
+            <div class="card-title">💼 财务职能方向</div>
+            <span id="dm_fin_total" class="count-pill"></span>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <span id="dm_fin_saved" style="font-size:11px;color:#10B981;font-weight:600;opacity:0;transition:opacity 0.3s;">✓ 已保存</span>
+            <button onclick="dmShowAdd('fin')" style="height:28px;padding:0 12px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;border:none;background:#FF2442;color:#fff;">＋ 新增</button>
+          </div>
         </div>
         <div class="card-body" style="padding-top:16px">
           <table class="demand-table">
-            <thead>
-              <tr>
-                <th>岗位方向</th>
-                <th>职级</th>
-                <th style="text-align:right">需求</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>商业财分</td>
-                <td><span class="level-tag">IC</span></td>
-                <td style="text-align:right"><span class="count-pill">× 2</span></td>
-              </tr>
-              <tr>
-                <td>技术财分</td>
-                <td><span class="level-tag">IC</span></td>
-                <td style="text-align:right"><span class="count-pill">× 3</span></td>
-              </tr>
-              <tr>
-                <td>社区用增财分</td>
-                <td><span class="level-tag">IC</span></td>
-                <td style="text-align:right"><span class="count-pill">× 1</span></td>
-              </tr>
-              <tr>
-                <td>职能财分</td>
-                <td><span class="level-tag">IC</span></td>
-                <td style="text-align:right"><span class="count-pill">× 1</span></td>
-              </tr>
-              <tr>
-                <td>FP&amp;A</td>
-                <td><span class="level-tag">IC</span></td>
-                <td style="text-align:right"><span class="count-pill">× 3</span></td>
-              </tr>
-              <tr>
-                <td>电商财分</td>
-                <td><span class="level-tag">L1</span></td>
-                <td style="text-align:right"><span class="count-pill">× 1</span></td>
-              </tr>
-            </tbody>
+            <thead><tr><th>岗位方向</th><th>职级</th><th style="text-align:right">需求</th><th style="width:64px">操作</th></tr></thead>
+            <tbody id="dm_fin_body"></tbody>
           </table>
         </div>
       </div>
 
       <!-- 中台经分 -->
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">📊 中台经分方向</div>
-          <span class="count-pill">共 16 个需求</span>
+        <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+          <div>
+            <div class="card-title">📊 中台经分方向</div>
+            <span id="dm_biz_total" class="count-pill"></span>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <span id="dm_biz_saved" style="font-size:11px;color:#10B981;font-weight:600;opacity:0;transition:opacity 0.3s;">✓ 已保存</span>
+            <button onclick="dmShowAdd('biz')" style="height:28px;padding:0 12px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;border:none;background:#FF2442;color:#fff;">＋ 新增</button>
+          </div>
         </div>
         <div class="card-body" style="padding-top:16px">
           <table class="demand-table">
-            <thead>
-              <tr>
-                <th>岗位方向</th>
-                <th style="text-align:right">需求</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>交易经分 BP</td>
-                <td style="text-align:right"><span class="count-pill">× 5</span></td>
-              </tr>
-              <tr>
-                <td>商业化经分 BP <span style="color:#aaa;font-size:11px">（KA 4，生态 1）</span></td>
-                <td style="text-align:right"><span class="count-pill">× 5</span></td>
-              </tr>
-              <tr>
-                <td>渠道经分 BP</td>
-                <td style="text-align:right"><span class="count-pill">× 2</span></td>
-              </tr>
-              <tr>
-                <td>大盘赛道策略分析 <span style="color:#aaa;font-size:11px">（交易 3，商业化 1）</span></td>
-                <td style="text-align:right"><span class="count-pill">× 4</span></td>
-              </tr>
-            </tbody>
+            <thead><tr><th>岗位方向</th><th style="text-align:right">需求</th><th style="width:64px">操作</th></tr></thead>
+            <tbody id="dm_biz_body"></tbody>
           </table>
-
           <div style="margin-top:24px">
             <div class="section-label">候选人方向提示</div>
             <div style="font-size:13px;color:#666;line-height:1.7;margin-top:8px">
@@ -1015,6 +900,71 @@
     </div>
   </div>
 
+</div>
+
+<!-- ===== OVERVIEW UNIVERSAL MODAL (goals / profiles / assets) ===== -->
+<div id="ov_modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:2000;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:18px;padding:28px 32px;width:500px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+    <h2 id="ovm_title" style="font-size:17px;font-weight:800;margin-bottom:20px;">✏️ 编辑</h2>
+    <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px;">
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">图标 / 数字 / Emoji</label>
+        <input type="text" id="ovm_num" placeholder="如 10 / ≥2 / 🚀 / 🗺️" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:15px;font-family:inherit;outline:none;width:100%;text-align:center;">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">标题 / 名称</label>
+        <input type="text" id="ovm_strong" placeholder="如 结果目标：每人每双月 10 个 Offer" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%;">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">描述</label>
+        <textarea id="ovm_desc" placeholder="补充说明" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;height:72px;resize:vertical;width:100%;"></textarea>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button onclick="ovCloseModal()" style="height:36px;padding:0 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #E5E7EB;background:transparent;color:#6B7280;">取消</button>
+      <button onclick="ovSave()" style="height:36px;padding:0 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#FF2442;color:#fff;">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FLOW EDIT MODAL ===== -->
+<div id="ov_flow_modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:2000;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:18px;padding:28px 32px;width:460px;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+    <h2 style="font-size:17px;font-weight:800;margin-bottom:8px;">✏️ 编辑面试流程</h2>
+    <p style="font-size:12px;color:#9CA3AF;margin-bottom:16px;">每行一个步骤，按顺序排列，换行符会转为换行显示</p>
+    <textarea id="ov_flow_input" style="border:1px solid #E5E7EB;border-radius:8px;padding:10px;font-size:13px;font-family:inherit;outline:none;width:100%;height:160px;resize:vertical;margin-bottom:16px;"></textarea>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button onclick="document.getElementById('ov_flow_modal').style.display='none'" style="height:36px;padding:0 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #E5E7EB;background:transparent;color:#6B7280;">取消</button>
+      <button onclick="ovFlowSave()" style="height:36px;padding:0 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#FF2442;color:#fff;">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DEMAND MODAL ===== -->
+<div id="dm_modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:2000;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:18px;padding:28px 32px;width:440px;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+    <h2 id="dmm_title" style="font-size:17px;font-weight:800;margin-bottom:20px;">✏️ 新增需求</h2>
+    <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px;">
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">岗位方向</label>
+        <input type="text" id="dmm_pos" placeholder="如 商业财分 / 交易经分 BP" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%;">
+      </div>
+      <div id="dmm_level_row" style="display:flex;flex-direction:column;gap:5px;">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">职级</label>
+        <select id="dmm_level" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%;">
+          <option>IC</option><option>L1</option><option>L2</option><option>IC/L1</option>
+        </select>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">需求人数</label>
+        <input type="number" id="dmm_count" min="1" value="1" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%;">
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button onclick="dmCloseModal()" style="height:36px;padding:0 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #E5E7EB;background:transparent;color:#6B7280;">取消</button>
+      <button onclick="dmSave()" style="height:36px;padding:0 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#FF2442;color:#fff;">保存</button>
+    </div>
+  </div>
 </div>
 
 <!-- ===== SCREENING MODAL ===== -->
@@ -1480,6 +1430,257 @@
   });
 
   trInit();
+
+  // ======= OVERVIEW MODULE (Tab1) =======
+  const OV_KEY = 'analysis_overview_v1';
+  const OV_SEED = {
+    goals: [
+      {id:1, num:'10',  strong:'结果目标：每人每双月 10 个 Offer',   desc:'3 位 TA 全力推进，双月共交付 30 个有效 Offer'},
+      {id:2, num:'≥2',  strong:'过程目标：每周 ≥2 人进阅影专场',     desc:'保持稳定的人选供给节奏，周度复盘进展'},
+      {id:3, num:'30',  strong:'专项总目标：30 个分析背景人选',       desc:'覆盖财务职能 11 个 + 中台经分 16 个缺口'}
+    ],
+    profiles: [
+      {id:1, icon:'🚀', strong:'创业范',           desc:'一人成军，扛得住压力，主动推事情落地'},
+      {id:2, icon:'📐', strong:'专业 × 经历交叉',  desc:'理科背景（计算机/统计/数学/经济）+ 投行/量化/商业分析经历'},
+      {id:3, icon:'🤖', strong:'真实拥抱 AI',      desc:'有 before/after 案例，能举具体场景，而非只会说模型名字'},
+      {id:4, icon:'⚡', strong:'年轻高潜',          desc:'工作 2-3 年，跳出传统财分框架，看数分/商分/分析师方向'}
+    ],
+    flow: ['TA Sourcing\n& Screening','HRBP\n吸引','阅影\n专场','定向\n分配','Offer','入职'],
+    assets: [
+      {id:1, emoji:'🗺️', name:'分析人才 Mapping 资料', desc:'目标公司 × 目标岗位的系统性人才地图，持续更新'},
+      {id:2, emoji:'📚', name:'高阶候选人资料库',       desc:'有质量的 Tough List，覆盖 MBB、美团、字节等核心来源'},
+      {id:3, emoji:'💬', name:'有效面试交互资料',       desc:'经过验证的 sourcing 话术、screening 问题、HRBP 吸引脚本'},
+      {id:4, emoji:'⚙️', name:'可提效的分析 AI 产品',  desc:'探索 AI sourcing 工具的实际应用，沉淀可复用的 AI 工作流'}
+    ]
+  };
+
+  let ovData = {}, ovEditCtx = null; // ctx: {section, id}
+
+  function ovInit() {
+    const saved = localStorage.getItem(OV_KEY);
+    if (saved) { try { ovData = JSON.parse(saved); } catch(e) { ovData = JSON.parse(JSON.stringify(OV_SEED)); } }
+    else { ovData = JSON.parse(JSON.stringify(OV_SEED)); ovPersist(false); }
+    ovRenderAll();
+  }
+
+  function ovPersist(hint, section) {
+    localStorage.setItem(OV_KEY, JSON.stringify(ovData));
+    if (hint) {
+      const idMap = {goals:'ov_goal_saved', profiles:'ov_prof_saved', assets:'ov_asset_saved'};
+      const el = document.getElementById(idMap[section]||'ov_goal_saved');
+      if (el) { el.style.opacity='1'; setTimeout(()=>el.style.opacity='0',1800); }
+    }
+  }
+
+  function ovRenderAll() { ovRenderGoals(); ovRenderProfiles(); ovRenderFlow(); ovRenderAssets(); }
+
+  function ovRenderGoals() {
+    const el = document.getElementById('ov_goal_list');
+    el.innerHTML = (ovData.goals||[]).map(g => `
+      <div class="goal-item" style="position:relative">
+        <div class="goal-num">${esc2(g.num)}</div>
+        <div class="goal-desc">
+          <strong>${esc2(g.strong)}</strong>
+          <span>${esc2(g.desc)}</span>
+        </div>
+        <div style="position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;gap:2px">
+          <button onclick="ovGoalEdit(${g.id})" style="background:none;border:none;cursor:pointer;font-size:13px;padding:2px 4px;color:#D1D5DB" title="编辑">✏️</button>
+          <button onclick="ovGoalDelete(${g.id})" style="background:none;border:none;cursor:pointer;font-size:13px;padding:2px 4px;color:#D1D5DB" title="删除">🗑️</button>
+        </div>
+      </div>`).join('');
+  }
+
+  function ovRenderProfiles() {
+    const el = document.getElementById('ov_prof_list');
+    el.innerHTML = (ovData.profiles||[]).map(p => `
+      <div class="profile-item" style="position:relative">
+        <div class="profile-icon">${esc2(p.icon)}</div>
+        <div class="profile-text">
+          <strong>${esc2(p.strong)}</strong>
+          <span>${esc2(p.desc)}</span>
+        </div>
+        <div style="position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;gap:2px">
+          <button onclick="ovProfEdit(${p.id})" style="background:none;border:none;cursor:pointer;font-size:13px;padding:2px 4px;color:#D1D5DB">✏️</button>
+          <button onclick="ovProfDelete(${p.id})" style="background:none;border:none;cursor:pointer;font-size:13px;padding:2px 4px;color:#D1D5DB">🗑️</button>
+        </div>
+      </div>`).join('');
+  }
+
+  function ovRenderFlow() {
+    const steps = ovData.flow || [];
+    const el = document.getElementById('ov_flow_steps');
+    el.innerHTML = steps.map((s,i) =>
+      `${i>0?'<div class="flow-arrow">›</div>':''}
+       <div class="flow-step">${esc2(s).replace(/\n/g,'<br>')}</div>`
+    ).join('');
+  }
+
+  function ovRenderAssets() {
+    const el = document.getElementById('ov_asset_list');
+    el.innerHTML = (ovData.assets||[]).map(a => `
+      <div class="output-item" style="position:relative">
+        <button onclick="ovAssetEdit(${a.id})" style="position:absolute;top:6px;right:28px;background:none;border:none;cursor:pointer;font-size:12px;color:#D1D5DB">✏️</button>
+        <button onclick="ovAssetDelete(${a.id})" style="position:absolute;top:6px;right:6px;background:none;border:none;cursor:pointer;font-size:12px;color:#D1D5DB">🗑️</button>
+        <span class="output-emoji">${esc2(a.emoji)}</span>
+        <div class="output-name">${esc2(a.name)}</div>
+        <div class="output-desc">${esc2(a.desc)}</div>
+      </div>`).join('');
+  }
+
+  // --- Goals CRUD ---
+  function ovGoalShowAdd() { ovEditCtx={section:'goals',id:null}; document.getElementById('ovm_title').textContent='✏️ 新增考核目标'; document.getElementById('ovm_num').value=''; document.getElementById('ovm_strong').value=''; document.getElementById('ovm_desc').value=''; document.getElementById('ov_modal').style.display='flex'; }
+  function ovGoalEdit(id) { const it=(ovData.goals||[]).find(g=>g.id===id); if(!it)return; ovEditCtx={section:'goals',id}; document.getElementById('ovm_title').textContent='✏️ 编辑考核目标'; document.getElementById('ovm_num').value=it.num; document.getElementById('ovm_strong').value=it.strong; document.getElementById('ovm_desc').value=it.desc; document.getElementById('ov_modal').style.display='flex'; }
+  function ovGoalDelete(id) { if(!confirm('确认删除此目标？'))return; ovData.goals=(ovData.goals||[]).filter(g=>g.id!==id); ovPersist(true,'goals'); ovRenderGoals(); }
+
+  // --- Profiles CRUD ---
+  function ovProfShowAdd() { ovEditCtx={section:'profiles',id:null}; document.getElementById('ovm_title').textContent='✏️ 新增画像维度'; document.getElementById('ovm_num').value=''; document.getElementById('ovm_strong').value=''; document.getElementById('ovm_desc').value=''; document.getElementById('ov_modal').style.display='flex'; }
+  function ovProfEdit(id) { const it=(ovData.profiles||[]).find(p=>p.id===id); if(!it)return; ovEditCtx={section:'profiles',id}; document.getElementById('ovm_title').textContent='✏️ 编辑画像维度'; document.getElementById('ovm_num').value=it.icon; document.getElementById('ovm_strong').value=it.strong; document.getElementById('ovm_desc').value=it.desc; document.getElementById('ov_modal').style.display='flex'; }
+  function ovProfDelete(id) { if(!confirm('确认删除此画像维度？'))return; ovData.profiles=(ovData.profiles||[]).filter(p=>p.id!==id); ovPersist(true,'profiles'); ovRenderProfiles(); }
+
+  // --- Flow edit ---
+  function ovFlowEdit() {
+    const steps = (ovData.flow||[]).join('\n');
+    document.getElementById('ov_flow_modal').style.display='flex';
+    document.getElementById('ov_flow_input').value=steps;
+  }
+  function ovFlowSave() {
+    const raw = document.getElementById('ov_flow_input').value;
+    ovData.flow = raw.split('\n').map(s=>s.trim()).filter(Boolean);
+    ovPersist(false);
+    ovRenderFlow();
+    document.getElementById('ov_flow_modal').style.display='none';
+  }
+
+  // --- Assets CRUD ---
+  function ovAssetShowAdd() { ovEditCtx={section:'assets',id:null}; document.getElementById('ovm_title').textContent='✏️ 新增资产'; document.getElementById('ovm_num').value=''; document.getElementById('ovm_strong').value=''; document.getElementById('ovm_desc').value=''; document.getElementById('ov_modal').style.display='flex'; }
+  function ovAssetEdit(id) { const it=(ovData.assets||[]).find(a=>a.id===id); if(!it)return; ovEditCtx={section:'assets',id}; document.getElementById('ovm_title').textContent='✏️ 编辑资产'; document.getElementById('ovm_num').value=it.emoji; document.getElementById('ovm_strong').value=it.name; document.getElementById('ovm_desc').value=it.desc; document.getElementById('ov_modal').style.display='flex'; }
+  function ovAssetDelete(id) { if(!confirm('确认删除此资产？'))return; ovData.assets=(ovData.assets||[]).filter(a=>a.id!==id); ovPersist(true,'assets'); ovRenderAssets(); }
+
+  // --- Universal save for overview modal ---
+  function ovSave() {
+    const ctx = ovEditCtx; if (!ctx) return;
+    const num = document.getElementById('ovm_num').value.trim();
+    const strong = document.getElementById('ovm_strong').value.trim();
+    const desc = document.getElementById('ovm_desc').value.trim();
+    if (!strong) { alert('请填写标题/名称'); return; }
+
+    if (ctx.section === 'goals') {
+      const row = {id: ctx.id!==null?ctx.id:Date.now(), num, strong, desc};
+      if (ctx.id!==null) { const i=(ovData.goals||[]).findIndex(g=>g.id===ctx.id); if(i!==-1)ovData.goals[i]=row; } else { ovData.goals=ovData.goals||[]; ovData.goals.push(row); }
+      ovPersist(true,'goals'); ovCloseModal(); ovRenderGoals();
+    } else if (ctx.section === 'profiles') {
+      const row = {id: ctx.id!==null?ctx.id:Date.now(), icon:num||'⭐', strong, desc};
+      if (ctx.id!==null) { const i=(ovData.profiles||[]).findIndex(p=>p.id===ctx.id); if(i!==-1)ovData.profiles[i]=row; } else { ovData.profiles=ovData.profiles||[]; ovData.profiles.push(row); }
+      ovPersist(true,'profiles'); ovCloseModal(); ovRenderProfiles();
+    } else if (ctx.section === 'assets') {
+      const row = {id: ctx.id!==null?ctx.id:Date.now(), emoji:num||'📦', name:strong, desc};
+      if (ctx.id!==null) { const i=(ovData.assets||[]).findIndex(a=>a.id===ctx.id); if(i!==-1)ovData.assets[i]=row; } else { ovData.assets=ovData.assets||[]; ovData.assets.push(row); }
+      ovPersist(true,'assets'); ovCloseModal(); ovRenderAssets();
+    }
+  }
+
+  function ovCloseModal() { document.getElementById('ov_modal').style.display='none'; ovEditCtx=null; }
+  document.getElementById('ov_modal').addEventListener('click',function(e){if(e.target===this)ovCloseModal();});
+  document.getElementById('ov_flow_modal').addEventListener('click',function(e){if(e.target===this)document.getElementById('ov_flow_modal').style.display='none';});
+  ovInit();
+
+  // ======= DEMAND MODULE (Tab2) =======
+  const DM_KEY = 'analysis_demand_v1';
+  const DM_SEED = {
+    fin: [
+      {id:1, pos:'商业财分',  level:'IC', count:2},
+      {id:2, pos:'技术财分',  level:'IC', count:3},
+      {id:3, pos:'社区用增财分', level:'IC', count:1},
+      {id:4, pos:'职能财分',  level:'IC', count:1},
+      {id:5, pos:'FP&A',      level:'IC', count:3},
+      {id:6, pos:'电商财分',  level:'L1', count:1}
+    ],
+    biz: [
+      {id:1, pos:'交易经分 BP',          level:'', count:5},
+      {id:2, pos:'商业化经分 BP（KA 4，生态 1）', level:'', count:5},
+      {id:3, pos:'渠道经分 BP',          level:'', count:2},
+      {id:4, pos:'大盘赛道策略分析（交易 3，商业化 1）', level:'', count:4}
+    ]
+  };
+
+  let dmData = {}, dmEditCtx = null; // {group, id}
+
+  function dmInit() {
+    const saved = localStorage.getItem(DM_KEY);
+    if (saved) { try { dmData = JSON.parse(saved); } catch(e) { dmData = JSON.parse(JSON.stringify(DM_SEED)); } }
+    else { dmData = JSON.parse(JSON.stringify(DM_SEED)); dmPersist(false,null); }
+    dmRenderAll();
+  }
+
+  function dmTotal(group) { return (dmData[group]||[]).reduce((s,r)=>s+Number(r.count||0),0); }
+
+  function dmPersist(hint, group) {
+    localStorage.setItem(DM_KEY, JSON.stringify(dmData));
+    if (hint && group) {
+      const el = document.getElementById(`dm_${group}_saved`);
+      if (el) { el.style.opacity='1'; setTimeout(()=>el.style.opacity='0',1800); }
+    }
+  }
+
+  function dmRenderAll() { dmRenderGroup('fin'); dmRenderGroup('biz'); }
+
+  function dmRenderGroup(g) {
+    const tbody = document.getElementById(`dm_${g}_body`);
+    const total = document.getElementById(`dm_${g}_total`);
+    const rows = dmData[g]||[];
+    const isFin = g==='fin';
+    if (total) total.textContent = `共 ${dmTotal(g)} 个需求`;
+    tbody.innerHTML = rows.map(r => `<tr>
+      <td>${esc2(r.pos)}</td>
+      ${isFin ? `<td><span class="level-tag">${esc2(r.level)}</span></td>` : ''}
+      <td style="text-align:right"><span class="count-pill">× ${r.count}</span></td>
+      <td>
+        <button onclick="dmEdit('${g}',${r.id})" style="background:none;border:none;cursor:pointer;font-size:13px;padding:2px 3px;color:#D1D5DB">✏️</button>
+        <button onclick="dmDelete('${g}',${r.id})" style="background:none;border:none;cursor:pointer;font-size:13px;padding:2px 3px;color:#D1D5DB">🗑️</button>
+      </td>
+    </tr>`).join('');
+  }
+
+  function dmShowAdd(g) {
+    dmEditCtx = {group:g, id:null};
+    document.getElementById('dmm_title').textContent = `✏️ 新增${g==='fin'?'财务职能':'经分'}需求`;
+    document.getElementById('dmm_pos').value='';
+    document.getElementById('dmm_level').value='IC';
+    document.getElementById('dmm_count').value='1';
+    document.getElementById('dmm_level_row').style.display = g==='fin' ? '' : 'none';
+    document.getElementById('dm_modal').style.display='flex';
+  }
+
+  function dmEdit(g, id) {
+    const it = (dmData[g]||[]).find(r=>r.id===id); if(!it)return;
+    dmEditCtx = {group:g, id};
+    document.getElementById('dmm_title').textContent = '✏️ 编辑需求';
+    document.getElementById('dmm_pos').value = it.pos||'';
+    document.getElementById('dmm_level').value = it.level||'IC';
+    document.getElementById('dmm_count').value = it.count||1;
+    document.getElementById('dmm_level_row').style.display = g==='fin' ? '' : 'none';
+    document.getElementById('dm_modal').style.display='flex';
+  }
+
+  function dmDelete(g, id) {
+    if(!confirm('确认删除此需求？'))return;
+    dmData[g]=(dmData[g]||[]).filter(r=>r.id!==id);
+    dmPersist(true,g); dmRenderGroup(g);
+  }
+
+  function dmSave() {
+    const ctx=dmEditCtx; if(!ctx)return;
+    const pos=document.getElementById('dmm_pos').value.trim();
+    if(!pos){alert('请填写岗位方向');return;}
+    const row={id:ctx.id!==null?ctx.id:Date.now(), pos, level:document.getElementById('dmm_level').value, count:Number(document.getElementById('dmm_count').value)||1};
+    if(ctx.id!==null){const i=(dmData[ctx.group]||[]).findIndex(r=>r.id===ctx.id);if(i!==-1)dmData[ctx.group][i]=row;}
+    else{dmData[ctx.group]=dmData[ctx.group]||[];dmData[ctx.group].push(row);}
+    dmPersist(true,ctx.group); dmCloseModal(); dmRenderGroup(ctx.group);
+  }
+
+  function dmCloseModal(){document.getElementById('dm_modal').style.display='none';dmEditCtx=null;}
+  document.getElementById('dm_modal').addEventListener('click',function(e){if(e.target===this)dmCloseModal();});
+  dmInit();
 
   // ======= SCREENING MODULE =======
   const SC_KEY = 'analysis_screening_v1';
