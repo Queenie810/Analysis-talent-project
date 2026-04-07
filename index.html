@@ -401,11 +401,11 @@
   }
 
   .sourcing-table td {
-    padding: 12px 14px;
+    padding: 14px 14px;
     border-bottom: 1px solid var(--border);
     color: var(--text);
     vertical-align: top;
-    line-height: 1.55;
+    line-height: 1.65;
   }
 
   .sourcing-table tr:last-child td { border-bottom: none; }
@@ -428,6 +428,50 @@
     color: var(--red);
     border-color: #FFDDD0;
   }
+
+  /* 成员名字徽章 */
+  .member-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    background: var(--warm-bg);
+    border: 1px solid var(--warm-border);
+    padding: 4px 11px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* Tough List 链接 */
+  .doc-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2060C8;
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid #CCDAF5;
+    background: #F0F5FF;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .doc-link:hover { background: #DDE9FF; }
+
+  /* 策略动作列表 */
+  .action-list {
+    margin: 0;
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .action-list li { color: #333; font-size: 12.5px; line-height: 1.6; }
+  .action-list li .highlight { background: #FFFF33; padding: 0 2px; border-radius: 2px; color: #333; font-weight: 600; }
 
   /* ====== SCREENING TABLE ====== */
   .screening-table {
@@ -838,45 +882,75 @@
   <!-- ===== TAB 3: Sourcing 策略 ===== -->
   <div class="tab-content" id="tab-sourcing">
 
-    <div class="card section-gap">
+    <div class="card">
       <div class="card-header">
-        <div class="card-title">🔍 核心 Sourcing 方向 & 打法</div>
+        <div class="card-title">🔍 攻坚小组成员 · Sourcing 分工</div>
+        <span style="font-size:11px;color:#bbb">各成员负责方向 + 策略动作 + Tough List</span>
       </div>
       <div class="card-body" style="padding-top:16px">
         <table class="sourcing-table">
           <thead>
             <tr>
-              <th style="width:180px">方向</th>
-              <th style="width:240px">重点公司</th>
-              <th>核心动作</th>
+              <th style="width:80px">成员</th>
+              <th style="width:150px">重点方向</th>
+              <th style="width:180px">重点公司</th>
+              <th>策略动作</th>
+              <th style="width:160px">Tough List</th>
             </tr>
           </thead>
           <tbody>
+
+            <!-- 云阳 -->
             <tr>
-              <td><strong>咨询 / 证券分析师</strong></td>
+              <td><span class="member-badge">☁️ 云阳</span></td>
+              <td style="color:#444;font-size:12.5px">咨询分析师<br>证券分析师</td>
               <td>
                 <div class="company-tags">
-                  <span class="company-tag hot">MBB</span>
-                  <span class="company-tag">大小摩</span>
-                  <span class="company-tag">Citi</span>
-                  <span class="company-tag">巴克莱</span>
+                  <span class="company-tag hot">MBB咨询</span>
                 </div>
               </td>
-              <td>MBB Generalist / DA / KT — referral 为主；大小摩、Citi 校招触达</td>
+              <td>
+                <ol class="action-list">
+                  <li><span class="highlight">MBB</span> Generalist / DA / KT — referral</li>
+                  <li>大小摩、Citi、巴克莱校招触达</li>
+                  <li>VC referral</li>
+                </ol>
+              </td>
+              <td>
+                <a class="doc-link" href="https://docs.xiaohongshu.com/doc/57a5eb7d81fc4c6f76799b1517da9522" target="_blank">
+                  📄 电商财务分析 L1/IC — MBB 招聘策略
+                </a>
+              </td>
             </tr>
+
+            <!-- 玄鸟 -->
             <tr>
-              <td><strong>品牌方 finance / 互联网</strong></td>
+              <td><span class="member-badge">🐦 玄鸟</span></td>
+              <td style="color:#444;font-size:12.5px">品牌方finance<br>其他互联网</td>
               <td>
                 <div class="company-tags">
-                  <span class="company-tag hot">P&G</span>
+                  <span class="company-tag hot">P&amp;G</span>
                   <span class="company-tag">Shopee</span>
                   <span class="company-tag hot">美团</span>
                 </div>
               </td>
-              <td>看美团商分，引导看财分；外企 MT 方向触达</td>
+              <td>
+                <ol class="action-list">
+                  <li>T1：target 美团商分的人，引导看财分</li>
+                  <li>T2：看外企 MT</li>
+                </ol>
+              </td>
+              <td>
+                <a class="doc-link" href="https://docs.xiaohongshu.com/sheet/e9c4818be2c3cff568a6476ea411350a" target="_blank">
+                  📊 分析岗 Talent List - 玄鸟
+                </a>
+              </td>
             </tr>
+
+            <!-- 车英 -->
             <tr>
-              <td><strong>互联网商分 / 战略（美团系）</strong></td>
+              <td><span class="member-badge">🚗 车英</span></td>
+              <td style="color:#444;font-size:12.5px">互联网商分<br>战略</td>
               <td>
                 <div class="company-tags">
                   <span class="company-tag hot">美团 Keeta</span>
@@ -885,10 +959,24 @@
                   <span class="company-tag">阿里</span>
                 </div>
               </td>
-              <td>主动 sourcing 美团商分（重点核心本地商业 + Keeta 巴西/沙特）；内推字节、阿里商分/战略</td>
+              <td>
+                <ol class="action-list">
+                  <li>T1：主动 sourcing：<span class="highlight">美团商分（重点关注核心本地商业 + Keeta 巴西/沙特）</span></li>
+                  <li>T2：内推：字节、阿里商分/战略</li>
+                  <li>T3：top 院校（清北复交港大）工作三年内 young hipo 触达建联</li>
+                </ol>
+              </td>
+              <td>
+                <a class="doc-link" href="https://cheying072-cmyk.github.io/meituan-talent-dashboard/" target="_blank">
+                  📊 人才库美团商分人选看板
+                </a>
+              </td>
             </tr>
+
+            <!-- 粥粥 -->
             <tr>
-              <td><strong>互联网商分 / 战略（投资系）</strong></td>
+              <td><span class="member-badge">🍚 粥粥</span></td>
+              <td style="color:#444;font-size:12.5px">互联网商分<br>战略</td>
               <td>
                 <div class="company-tags">
                   <span class="company-tag hot">美团战投</span>
@@ -898,32 +986,50 @@
                   <span class="company-tag">滴滴</span>
                 </div>
               </td>
-              <td>扫库 + 复捞历史人才库；内推手上待入职字节人选；主动 scouring 美团商分 + 外部活跃人选开源</td>
+              <td>
+                <ol class="action-list">
+                  <li>扫库 + 复捞：系统回溯历史人才库，重点复盘符合画像、过往沟通过及 turndown 人选，分批重新评估推进 <a href="https://docs.xiaohongshu.com/sheet/3ea2a572564ba7cd0b73d71b7b202da6" target="_blank" style="color:#2060C8;font-size:11.5px">📊 25分析岗面试情况</a></li>
+                  <li>内推：持续跟进手上待入职字节人选内推</li>
+                  <li>主动 sourcing：<span class="highlight">重点聚焦小象、快驴和战投</span>，同步覆盖阿里、拼多多、滴滴等战略/商业/经营分析师</li>
+                </ol>
+              </td>
+              <td>
+                <a class="doc-link" href="https://docs.xiaohongshu.com/sheet/b83ca6c8d69387b46809ced1a267c229" target="_blank">
+                  📊 分析攻坚 touching list - 粥粥
+                </a>
+              </td>
             </tr>
+
+            <!-- 程曦 -->
             <tr>
-              <td><strong>AI + 分析跨界</strong></td>
+              <td><span class="member-badge">🌟 程曦</span></td>
+              <td style="color:#444;font-size:12.5px">互联网经分<br>商分</td>
               <td>
                 <div class="company-tags">
+                  <span class="company-tag" style="background:#F0F8FF;border-color:#CCE4FF;color:#2060A0">AI sourcing</span>
                   <span class="company-tag" style="background:#F0F8FF;border-color:#CCE4FF;color:#2060A0">全网开源</span>
                 </div>
               </td>
-              <td>借助 AI 工具深度穷尽式 sourcing，沉淀外部人才库工作流</td>
+              <td>
+                <ol class="action-list">
+                  <li>借助 AI 工具深度穷尽式 sourcing</li>
+                  <li>外部人才库开源建联，沉淀可复用 AI 工作流</li>
+                </ol>
+              </td>
+              <td>
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <a class="doc-link" href="https://analytics-talent-pool-production.up.railway.app/#/" target="_blank">
+                    🤖 外部人才库 sourcing
+                  </a>
+                  <a class="doc-link" href="https://docs.xiaohongshu.com/sheet/b4d43aa5a63efe13e478c0c7c939b18d" target="_blank">
+                    📊 分析岗 tracking list - 程曦
+                  </a>
+                </div>
+              </td>
             </tr>
+
           </tbody>
         </table>
-      </div>
-    </div>
-
-    <!-- Top院校提示 -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">🎓 年轻高潜补充方向</div>
-      </div>
-      <div class="card-body">
-        <div style="font-size:13.5px;color:#444;line-height:1.75">
-          对于 <strong>工作 3 年以内的 young hipo</strong>，可主动触达清北复交、港大等顶院校应届/近届生，建联 + 培养意向，作为长线 pipeline 储备。<br>
-          <span style="color:var(--text-muted);font-size:12.5px">重点关注：统计 / 计算机 / 数学 / 信息工程背景，有过投行实习、量化实习、咨询项目经历者优先。</span>
-        </div>
       </div>
     </div>
 
