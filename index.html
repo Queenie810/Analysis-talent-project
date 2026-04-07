@@ -1285,22 +1285,41 @@
 
   let trData = [], trFiltered = [], trEditId = null, trSortCol = 'week', trSortDir = 1;
 
+  // url 字段索引，按姓名快速查找 seed 中的链接
+  const TR_URL_MAP = {};
+  TR_SEED.forEach(d => { if (d.url) TR_URL_MAP[d.name] = d.url; });
+
   function trInit() {
     const saved = localStorage.getItem(TR_KEY);
     if (saved) {
-      try { trData = JSON.parse(saved); } catch(e) { trData = TR_SEED.map((d,i) => ({...d, id:i})); }
+      try {
+        trData = JSON.parse(saved);
+        // 迁移：如果老数据里某条记录没有 url，就从 SEED 里补上
+        let migrated = false;
+        trData.forEach(r => {
+          if ((r.url === undefined || r.url === null || r.url === '') && TR_URL_MAP[r.name]) {
+            r.url = TR_URL_MAP[r.name];
+            migrated = true;
+          }
+        });
+        if (migrated) trPersist(false);
+      } catch(e) {
+        trData = TR_SEED.map((d,i) => ({...d, id:i}));
+      }
     } else {
       trData = TR_SEED.map((d,i) => ({...d, id:i}));
-      trPersist();
+      trPersist(false);
     }
     trFilter();
   }
 
-  function trPersist() {
+  function trPersist(showHint = true) {
     localStorage.setItem(TR_KEY, JSON.stringify(trData));
-    const el = document.getElementById('tr_saved');
-    el.style.opacity = '1';
-    setTimeout(() => el.style.opacity = '0', 1800);
+    if (showHint) {
+      const el = document.getElementById('tr_saved');
+      el.style.opacity = '1';
+      setTimeout(() => el.style.opacity = '0', 1800);
+    }
   }
 
   function trSClass(s) {
