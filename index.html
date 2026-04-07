@@ -913,128 +913,46 @@
 
   <!-- ===== TAB 4: Screening 话术 ===== -->
   <div class="tab-content" id="tab-screening">
-
     <div class="card">
-      <div class="card-header">
-        <div class="card-title">💬 AI 能力 Screening 问题</div>
-        <span style="font-size:11px;color:#bbb">AI 技能是这批人选的核心考察维度</span>
+      <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div class="card-title">💬 Screening 话术库</div>
+          <span style="font-size:11px;color:#bbb">可随时新增 / 编辑问题卡片，刷新不丢失</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <span id="sc_saved" style="font-size:11px;color:#10B981;font-weight:600;opacity:0;transition:opacity 0.3s;">✓ 已保存</span>
+          <button onclick="scShowAdd()" style="height:34px;padding:0 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#FF2442;color:#fff;">＋ 新增话术</button>
+        </div>
       </div>
       <div class="card-body" style="padding-top:16px">
-        <table class="screening-table">
+        <table class="screening-table" id="sc_table">
           <thead>
             <tr>
-              <th style="width:50%">问题</th>
+              <th style="width:30px">#</th>
+              <th style="width:30%">分类</th>
+              <th style="width:38%">问题</th>
               <th>考察意图</th>
+              <th style="width:72px">操作</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td class="q-text">从什么时候开始把 AI 引入分析工作的？</td>
-              <td class="intent-text">是不是跟风者？有没有真实应用，可追问公司内部有哪些 AI 工具</td>
-            </tr>
-            <tr>
-              <td class="q-text">做过的 AI + 分析项目里，最有成就感的 case 是什么？解决了业务上什么痛点？</td>
-              <td class="intent-text">是否有 before/after 对比；业务 case 能否 5 句话内讲清楚</td>
-            </tr>
-            <tr>
-              <td class="q-text">用 AI 处理结构化数据时（Excel / CSV / 数据库），你如何验证 AI 给出的分析结论是准确的？</td>
-              <td class="intent-text">是否有结构化 Prompt 能力（角色/任务/背景/输出格式）；更高阶是否能打 agent</td>
-            </tr>
-            <tr>
-              <td class="q-text">AI 在数据分析中，最容易找到切入的场景是什么？最难落地的痛点又是什么？</td>
-              <td class="intent-text">看逻辑，看是否辩证理解 AI 发展；避免只会唱赞歌的候选人</td>
-            </tr>
-            <tr>
-              <td class="q-text">AI 技术发展挺快，你平时通过什么渠道获取最新 AI 资讯和技术？</td>
-              <td class="intent-text">学习习惯（是否关注 GitHub 等一手来源）；看 AI 和过往分析工作的差异感知</td>
-            </tr>
-          </tbody>
+          <tbody id="sc_body"></tbody>
         </table>
 
-        <div class="warn-box">
+        <div id="sc_warn" class="warn-box" style="margin-top:20px">
           <span style="font-size:18px;flex-shrink:0">⚠️</span>
-          <div>
-            <strong>别被大模型名字唬住！</strong>（GPT-4o、Claude、Llama、RAG……）<br>
-            一定要求有<strong>例子</strong>：应用在什么场景，对业务有什么影响，业务也在用 AI，你觉得你们的差异化在哪里——<strong>要 be tough 去追问！</strong>
-          </div>
+          <div id="sc_warn_text"></div>
         </div>
       </div>
     </div>
-
   </div>
 
   <!-- ===== TAB 5: 吸引话术 ===== -->
   <div class="tab-content" id="tab-attract">
-
-    <div class="grid-2">
-      <div>
-        <!-- 总体开场 -->
-        <div class="card section-gap">
-          <div class="card-header">
-            <div class="card-title">🎤 总体开场话术</div>
-            <span style="font-size:11px;color:#bbb">适用于所有方向</span>
-          </div>
-          <div class="card-body">
-            <div class="attract-card">
-              <div class="attract-text">
-                在小红书，我们对分析类人才是<strong>拉通看待</strong>的——经营分析、财务分析、战略分析、投资分析，在实际业务中并不割裂。我们希望打破职能壁垒，让人才标准更统一、bar 更高；同时给大家留出更大的成长空间——今天你从策略分析切入，未来完全有机会接触财务分析、战略分析，<strong>能力可以复用，视野可以拓宽</strong>。
-                <br><br>
-                所以在整个面试过程中，你不用局限于投递的是哪个岗位，完全可以开放地聊聊你的兴趣和发展意愿。后续你可能会和不同业务方向的负责人交流，我们会根据双方意向进行双向选择。
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 财分吸引 -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">💼 财分方向吸引话术</div>
-            <span style="font-size:11px;color:#bbb">针对投行/金融分析师背景</span>
-          </div>
-          <div class="card-body">
-            <div class="attract-tag">核心 Pitch</div>
-            <div class="attract-text">
-              财务 BP 的含金量在于：<strong>用财务思维赚钱，不是做账</strong>。我们找的是"商人"、"公司内部投资人"，用财务工具解决商业问题。
-              <br><br>
-              投行的训练本质是<strong>"用财务数据理解商业本质"</strong>，而互联网财务 BP 需要<strong>"用商业逻辑反哺财务决策"</strong>——二者是同一能力的正反面。
-              <br><br>
-              财务 BP 是业务的<strong>"军师"</strong>，财务视角参与业务决策（定价、资源分配），从单一资本市场视角，升级到全业务链经营视角（用户增长→变现→现金流闭环）。
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 经分吸引 -->
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">📊 经分方向吸引话术</div>
-          <span style="font-size:11px;color:#bbb">针对商分/战略/数分背景</span>
-        </div>
-        <div class="card-body">
-          <div class="attract-tag">三个亮点</div>
-          <div class="attract-card">
-            <strong style="font-size:13px;color:var(--text)">第一，经分在小红书是"有手感的"。</strong>
-            <div class="attract-text" style="margin-top:6px">
-              我们不只看报表，也看产品、看内容、看商业模式和业务整体链路，帮助业务找机会点、增长点，共同对业务成功负责。你要从数据里洞察出"为什么这个品类突然爆了"，也要能从业务复盘里追问"我们到底做对了哪一步"。
-            </div>
-          </div>
-          <div class="attract-card">
-            <strong style="font-size:13px;color:var(--text)">第二，经分的边界是活的。</strong>
-            <div class="attract-text" style="margin-top:6px">
-              大商业融合后，你同时接触<strong>交易（电商闭环）和商业化（广告变现）</strong>两边的事情。你能看懂商家怎么花钱，也能看懂用户怎么花钱，视角是打通的。经分只是你的起点，不是你的边界——未来还可以接触财务分析、策略分析、投资分析。
-            </div>
-          </div>
-          <div class="attract-card">
-            <strong style="font-size:13px;color:var(--text)">第三，我们重视"能打的年轻人"。</strong>
-            <div class="attract-text" style="margin-top:6px">
-              经分团队这几年进了不少高潜，我们一直在找市场上最聪明的"策略脑"。重要的不是执行分析动作，而是有没有<strong>"想搞明白一件事"的劲头</strong>——有好奇心，有敬畏心，愿意从一线战场里长出自己的判断。
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:0 0 14px;">
+      <span id="at_saved" style="font-size:11px;color:#10B981;font-weight:600;opacity:0;transition:opacity 0.3s;">✓ 已保存</span>
+      <button onclick="atShowAdd()" style="height:34px;padding:0 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#FF2442;color:#fff;">＋ 新增话术卡片</button>
     </div>
-
+    <div id="at_grid" class="grid-2"></div>
   </div>
 
   <!-- ===== TAB 6: 人选 Tracking ===== -->
@@ -1097,6 +1015,64 @@
     </div>
   </div>
 
+</div>
+
+<!-- ===== SCREENING MODAL ===== -->
+<div id="sc_modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:2000;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:18px;padding:28px 32px;width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+    <h2 id="sc_modal_title" style="font-size:17px;font-weight:800;margin-bottom:20px;">✏️ 新增 Screening 话术</h2>
+    <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px;">
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">分类标签</label>
+        <input type="text" id="scm_cat" placeholder="如 AI 实战 / 通用 / 业务理解" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">问题内容</label>
+        <textarea id="scm_q" placeholder="请输入 Screening 问题" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;height:80px;resize:vertical;"></textarea>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">考察意图</label>
+        <textarea id="scm_intent" placeholder="说明这个问题的考察目的" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;height:72px;resize:vertical;"></textarea>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button onclick="scCloseModal()" style="height:36px;padding:0 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #E5E7EB;background:transparent;color:#6B7280;">取消</button>
+      <button onclick="scSave()" style="height:36px;padding:0 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#FF2442;color:#fff;">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ATTRACT MODAL ===== -->
+<div id="at_modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:2000;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:18px;padding:28px 32px;width:580px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+    <h2 id="at_modal_title" style="font-size:17px;font-weight:800;margin-bottom:20px;">✏️ 新增话术卡片</h2>
+    <div style="display:grid;grid-template-columns:72px 1fr;gap:14px;margin-bottom:20px;">
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">图标</label>
+        <input type="text" id="atm_icon" placeholder="🎤" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px;font-size:18px;font-family:inherit;outline:none;width:100%;text-align:center;">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">卡片标题</label>
+        <input type="text" id="atm_title" placeholder="如 财分方向吸引话术" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%;">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;grid-column:1/-1">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">副标题</label>
+        <input type="text" id="atm_subtitle" placeholder="如 针对投行/金融分析师背景" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%;">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;grid-column:1/-1">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">标签（可选，如「核心 Pitch」）</label>
+        <input type="text" id="atm_tag" placeholder="核心 Pitch / 三个亮点 / 留空则不显示" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%;">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;grid-column:1/-1">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">话术正文（支持 <code style="background:#F3F4F6;padding:1px 4px;border-radius:3px">**加粗**</code>，换行直接回车）</label>
+        <textarea id="atm_content" placeholder="在小红书，我们对分析类人才是**拉通看待**的..." style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%;height:160px;resize:vertical;"></textarea>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button onclick="atCloseModal()" style="height:36px;padding:0 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #E5E7EB;background:transparent;color:#6B7280;">取消</button>
+      <button onclick="atSave()" style="height:36px;padding:0 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#FF2442;color:#fff;">保存</button>
+    </div>
+  </div>
 </div>
 
 <!-- ===== SOURCING MODAL ===== -->
@@ -1504,6 +1480,184 @@
   });
 
   trInit();
+
+  // ======= SCREENING MODULE =======
+  const SC_KEY = 'analysis_screening_v1';
+  const SC_SEED = {
+    warn: '<strong>别被大模型名字唬住！</strong>（GPT-4o、Claude、Llama、RAG……）<br>一定要求有<strong>例子</strong>：应用在什么场景，对业务有什么影响，业务也在用 AI，你觉得你们的差异化在哪里——<strong>要 be tough 去追问！</strong>',
+    items: [
+      {id:1, category:'AI 实战', question:'从什么时候开始把 AI 引入分析工作的？', intent:'是不是跟风者？有没有真实应用，可追问公司内部有哪些 AI 工具'},
+      {id:2, category:'AI 实战', question:'做过的 AI + 分析项目里，最有成就感的 case 是什么？解决了业务上什么痛点？', intent:'是否有 before/after 对比；业务 case 能否 5 句话内讲清楚'},
+      {id:3, category:'AI 能力', question:'用 AI 处理结构化数据时（Excel / CSV / 数据库），你如何验证 AI 给出的分析结论是准确的？', intent:'是否有结构化 Prompt 能力（角色/任务/背景/输出格式）；更高阶是否能打 agent'},
+      {id:4, category:'AI 认知', question:'AI 在数据分析中，最容易找到切入的场景是什么？最难落地的痛点又是什么？', intent:'看逻辑，看是否辩证理解 AI 发展；避免只会唱赞歌的候选人'},
+      {id:5, category:'学习习惯', question:'AI 技术发展挺快，你平时通过什么渠道获取最新 AI 资讯和技术？', intent:'学习习惯（是否关注 GitHub 等一手来源）；看 AI 和过往分析工作的差异感知'}
+    ]
+  };
+
+  let scData = {}, scEditId = null;
+
+  function scInit() {
+    const saved = localStorage.getItem(SC_KEY);
+    if (saved) { try { scData = JSON.parse(saved); } catch(e) { scData = JSON.parse(JSON.stringify(SC_SEED)); } }
+    else { scData = JSON.parse(JSON.stringify(SC_SEED)); scPersist(false); }
+    scRender();
+  }
+
+  function scPersist(hint=true) {
+    localStorage.setItem(SC_KEY, JSON.stringify(scData));
+    if (hint) { const el=document.getElementById('sc_saved'); el.style.opacity='1'; setTimeout(()=>el.style.opacity='0',1800); }
+  }
+
+  function scRender() {
+    const tbody = document.getElementById('sc_body');
+    const items = scData.items || [];
+    if (!items.length) { tbody.innerHTML='<tr><td colspan="5" style="text-align:center;padding:40px;color:#9CA3AF">暂无话术，点击「新增话术」添加</td></tr>'; }
+    else {
+      tbody.innerHTML = items.map((it,i) => `<tr>
+        <td style="color:#9CA3AF;font-size:12px;font-weight:700">${i+1}</td>
+        <td><span style="display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;background:#FEF3C7;color:#92400E">${esc2(it.category)}</span></td>
+        <td class="q-text">${esc2(it.question)}</td>
+        <td class="intent-text">${esc2(it.intent)}</td>
+        <td>
+          <button onclick="scEdit(${it.id})" style="background:none;border:none;cursor:pointer;font-size:14px;padding:3px 4px;color:#9CA3AF" title="编辑">✏️</button>
+          <button onclick="scDelete(${it.id})" style="background:none;border:none;cursor:pointer;font-size:14px;padding:3px 4px;color:#9CA3AF" title="删除">🗑️</button>
+        </td>
+      </tr>`).join('');
+    }
+    // warn box
+    const warnEl = document.getElementById('sc_warn_text');
+    if (warnEl) warnEl.innerHTML = scData.warn || '';
+  }
+
+  function scShowAdd() {
+    scEditId = null;
+    document.getElementById('sc_modal_title').textContent = '✏️ 新增 Screening 话术';
+    document.getElementById('scm_cat').value = '';
+    document.getElementById('scm_q').value = '';
+    document.getElementById('scm_intent').value = '';
+    document.getElementById('sc_modal').style.display = 'flex';
+  }
+
+  function scEdit(id) {
+    const it = (scData.items||[]).find(d=>d.id===id); if (!it) return;
+    scEditId = id;
+    document.getElementById('sc_modal_title').textContent = '✏️ 编辑话术';
+    document.getElementById('scm_cat').value = it.category||'';
+    document.getElementById('scm_q').value = it.question||'';
+    document.getElementById('scm_intent').value = it.intent||'';
+    document.getElementById('sc_modal').style.display = 'flex';
+  }
+
+  function scDelete(id) {
+    if (!confirm('确认删除这条话术？')) return;
+    scData.items = (scData.items||[]).filter(d=>d.id!==id);
+    scPersist(); scRender();
+  }
+
+  function scSave() {
+    const q = document.getElementById('scm_q').value.trim();
+    if (!q) { alert('请填写问题内容'); return; }
+    const row = { id: scEditId!==null ? scEditId : Date.now(), category: document.getElementById('scm_cat').value.trim()||'通用', question: q, intent: document.getElementById('scm_intent').value.trim() };
+    if (scEditId!==null) { const i=(scData.items||[]).findIndex(d=>d.id===scEditId); if(i!==-1) scData.items[i]=row; }
+    else { scData.items = scData.items||[]; scData.items.push(row); }
+    scPersist(); scCloseModal(); scRender();
+  }
+
+  function scCloseModal() { document.getElementById('sc_modal').style.display='none'; scEditId=null; }
+  document.getElementById('sc_modal').addEventListener('click',function(e){if(e.target===this)scCloseModal();});
+  scInit();
+
+  // ======= ATTRACT MODULE =======
+  const AT_KEY = 'analysis_attract_v1';
+  const AT_SEED = [
+    {id:1, icon:'🎤', title:'总体开场话术', subtitle:'适用于所有方向', tag:'', content:'在小红书，我们对分析类人才是**拉通看待**的——经营分析、财务分析、战略分析、投资分析，在实际业务中并不割裂。我们希望打破职能壁垒，让人才标准更统一、bar 更高；同时给大家留出更大的成长空间——今天你从策略分析切入，未来完全有机会接触财务分析、战略分析，**能力可以复用，视野可以拓宽**。\n\n所以在整个面试过程中，你不用局限于投递的是哪个岗位，完全可以开放地聊聊你的兴趣和发展意愿。后续你可能会和不同业务方向的负责人交流，我们会根据双方意向进行双向选择。'},
+    {id:2, icon:'💼', title:'财分方向吸引话术', subtitle:'针对投行/金融分析师背景', tag:'核心 Pitch', content:'财务 BP 的含金量在于：**用财务思维赚钱，不是做账**。我们找的是"商人"、"公司内部投资人"，用财务工具解决商业问题。\n\n投行的训练本质是**"用财务数据理解商业本质"**，而互联网财务 BP 需要**"用商业逻辑反哺财务决策"**——二者是同一能力的正反面。\n\n财务 BP 是业务的**"军师"**，财务视角参与业务决策（定价、资源分配），从单一资本市场视角，升级到全业务链经营视角（用户增长→变现→现金流闭环）。'},
+    {id:3, icon:'📊', title:'经分方向吸引话术', subtitle:'针对商分/战略/数分背景', tag:'三个亮点', content:'**第一，经分在小红书是"有手感的"。**\n我们不只看报表，也看产品、看内容、看商业模式和业务整体链路，帮助业务找机会点、增长点，共同对业务成功负责。\n\n**第二，经分的边界是活的。**\n大商业融合后，你同时接触**交易（电商闭环）和商业化（广告变现）**两边的事情。经分只是你的起点，不是你的边界。\n\n**第三，我们重视"能打的年轻人"。**\n重要的不是执行分析动作，而是有没有**"想搞明白一件事"的劲头**——有好奇心，有敬畏心，愿意从一线战场里长出自己的判断。'}
+  ];
+
+  let atData = [], atEditId = null;
+
+  function atInit() {
+    const saved = localStorage.getItem(AT_KEY);
+    if (saved) { try { atData = JSON.parse(saved); } catch(e) { atData = JSON.parse(JSON.stringify(AT_SEED)); } }
+    else { atData = JSON.parse(JSON.stringify(AT_SEED)); atPersist(false); }
+    atRender();
+  }
+
+  function atPersist(hint=true) {
+    localStorage.setItem(AT_KEY, JSON.stringify(atData));
+    if (hint) { const el=document.getElementById('at_saved'); el.style.opacity='1'; setTimeout(()=>el.style.opacity='0',1800); }
+  }
+
+  // 简单 markdown-like 渲染：**bold** → <strong>
+  function atMd(s) {
+    return esc2(s)
+      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+      .replace(/\n/g,'<br>');
+  }
+
+  function atRender() {
+    const grid = document.getElementById('at_grid');
+    if (!atData.length) { grid.innerHTML='<div style="padding:60px;text-align:center;color:#9CA3AF;grid-column:1/-1">暂无话术卡片，点击右上角「新增话术卡片」添加</div>'; return; }
+    grid.innerHTML = atData.map(it => `
+      <div class="card" style="position:relative">
+        <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
+          <div>
+            <div class="card-title">${esc2(it.icon)} ${esc2(it.title)}</div>
+            <span style="font-size:11px;color:#bbb">${esc2(it.subtitle)}</span>
+          </div>
+          <div style="display:flex;gap:4px;flex-shrink:0">
+            <button onclick="atEdit(${it.id})" style="background:none;border:none;cursor:pointer;font-size:14px;padding:3px 5px;border-radius:5px;color:#9CA3AF" title="编辑">✏️</button>
+            <button onclick="atDelete(${it.id})" style="background:none;border:none;cursor:pointer;font-size:14px;padding:3px 5px;border-radius:5px;color:#9CA3AF" title="删除">🗑️</button>
+          </div>
+        </div>
+        <div class="card-body">
+          ${it.tag ? `<div class="attract-tag">${esc2(it.tag)}</div>` : ''}
+          <div class="attract-card">
+            <div class="attract-text">${atMd(it.content)}</div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function atShowAdd() {
+    atEditId = null;
+    document.getElementById('at_modal_title').textContent = '✏️ 新增话术卡片';
+    ['atm_icon','atm_title','atm_subtitle','atm_tag','atm_content'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('at_modal').style.display = 'flex';
+  }
+
+  function atEdit(id) {
+    const it = atData.find(d=>d.id===id); if (!it) return;
+    atEditId = id;
+    document.getElementById('at_modal_title').textContent = `✏️ 编辑 · ${it.title}`;
+    document.getElementById('atm_icon').value = it.icon||'';
+    document.getElementById('atm_title').value = it.title||'';
+    document.getElementById('atm_subtitle').value = it.subtitle||'';
+    document.getElementById('atm_tag').value = it.tag||'';
+    document.getElementById('atm_content').value = it.content||'';
+    document.getElementById('at_modal').style.display = 'flex';
+  }
+
+  function atDelete(id) {
+    if (!confirm('确认删除这个话术卡片？')) return;
+    atData = atData.filter(d=>d.id!==id);
+    atPersist(); atRender();
+  }
+
+  function atSave() {
+    const title = document.getElementById('atm_title').value.trim();
+    if (!title) { alert('请填写卡片标题'); return; }
+    const row = { id: atEditId!==null ? atEditId : Date.now(), icon: document.getElementById('atm_icon').value.trim()||'💬', title, subtitle: document.getElementById('atm_subtitle').value.trim(), tag: document.getElementById('atm_tag').value.trim(), content: document.getElementById('atm_content').value.trim() };
+    if (atEditId!==null) { const i=atData.findIndex(d=>d.id===atEditId); if(i!==-1) atData[i]=row; }
+    else atData.push(row);
+    atPersist(); atCloseModal(); atRender();
+  }
+
+  function atCloseModal() { document.getElementById('at_modal').style.display='none'; atEditId=null; }
+  document.getElementById('at_modal').addEventListener('click',function(e){if(e.target===this)atCloseModal();});
+  atInit();
 
   // ======= SOURCING MODULE =======
   const SRC_KEY = 'analysis_sourcing_v1';
