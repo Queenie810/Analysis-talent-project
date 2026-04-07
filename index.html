@@ -882,158 +882,33 @@
 
   <!-- ===== TAB 3: Sourcing 策略 ===== -->
   <div class="tab-content" id="tab-sourcing">
-
     <div class="card">
-      <div class="card-header">
-        <div class="card-title">🔍 攻坚小组成员 · Sourcing 分工</div>
-        <span style="font-size:11px;color:#bbb">各成员负责方向 + 策略动作 + Tough List</span>
+      <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div class="card-title">🔍 攻坚小组成员 · Sourcing 分工</div>
+          <span style="font-size:11px;color:#bbb">各成员负责方向 + 策略动作 + Tough List &nbsp;·&nbsp; 可在线编辑，刷新不丢失</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <span id="src_saved" style="font-size:11px;color:#10B981;font-weight:600;opacity:0;transition:opacity 0.3s;">✓ 已保存</span>
+          <button onclick="srcShowAdd()" style="height:34px;padding:0 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:none;background:#FF2442;color:#fff;">＋ 新增成员</button>
+        </div>
       </div>
-      <div class="card-body" style="padding-top:16px">
-        <table class="sourcing-table">
+      <div class="card-body" style="padding-top:16px;overflow-x:auto;">
+        <table class="sourcing-table" id="src_table">
           <thead>
             <tr>
-              <th style="width:80px">成员</th>
-              <th style="width:150px">重点方向</th>
-              <th style="width:180px">重点公司</th>
+              <th style="width:90px">成员</th>
+              <th style="width:140px">重点方向</th>
+              <th style="width:200px">重点公司</th>
               <th>策略动作</th>
-              <th style="width:160px">Tough List</th>
+              <th style="width:180px">Tough List 文档</th>
+              <th style="width:72px">操作</th>
             </tr>
           </thead>
-          <tbody>
-
-            <!-- 云阳 -->
-            <tr>
-              <td><span class="member-badge">☁️ 云阳</span></td>
-              <td style="color:#444;font-size:12.5px">咨询分析师<br>证券分析师</td>
-              <td>
-                <div class="company-tags">
-                  <span class="company-tag hot">MBB咨询</span>
-                </div>
-              </td>
-              <td>
-                <ol class="action-list">
-                  <li><span class="highlight">MBB</span> Generalist / DA / KT — referral</li>
-                  <li>大小摩、Citi、巴克莱校招触达</li>
-                  <li>VC referral</li>
-                </ol>
-              </td>
-              <td>
-                <a class="doc-link" href="https://docs.xiaohongshu.com/doc/57a5eb7d81fc4c6f76799b1517da9522" target="_blank">
-                  📄 电商财务分析 L1/IC — MBB 招聘策略
-                </a>
-              </td>
-            </tr>
-
-            <!-- 玄鸟 -->
-            <tr>
-              <td><span class="member-badge">🐦 玄鸟</span></td>
-              <td style="color:#444;font-size:12.5px">品牌方finance<br>其他互联网</td>
-              <td>
-                <div class="company-tags">
-                  <span class="company-tag hot">P&amp;G</span>
-                  <span class="company-tag">Shopee</span>
-                  <span class="company-tag hot">美团</span>
-                </div>
-              </td>
-              <td>
-                <ol class="action-list">
-                  <li>T1：target 美团商分的人，引导看财分</li>
-                  <li>T2：看外企 MT</li>
-                </ol>
-              </td>
-              <td>
-                <a class="doc-link" href="https://docs.xiaohongshu.com/sheet/e9c4818be2c3cff568a6476ea411350a" target="_blank">
-                  📊 分析岗 Talent List - 玄鸟
-                </a>
-              </td>
-            </tr>
-
-            <!-- 车英 -->
-            <tr>
-              <td><span class="member-badge">🚗 车英</span></td>
-              <td style="color:#444;font-size:12.5px">互联网商分<br>战略</td>
-              <td>
-                <div class="company-tags">
-                  <span class="company-tag hot">美团 Keeta</span>
-                  <span class="company-tag hot">美团本地</span>
-                  <span class="company-tag">字节</span>
-                  <span class="company-tag">阿里</span>
-                </div>
-              </td>
-              <td>
-                <ol class="action-list">
-                  <li>T1：主动 sourcing：<span class="highlight">美团商分（重点关注核心本地商业 + Keeta 巴西/沙特）</span></li>
-                  <li>T2：内推：字节、阿里商分/战略</li>
-                  <li>T3：top 院校（清北复交港大）工作三年内 young hipo 触达建联</li>
-                </ol>
-              </td>
-              <td>
-                <a class="doc-link" href="https://cheying072-cmyk.github.io/meituan-talent-dashboard/" target="_blank">
-                  📊 人才库美团商分人选看板
-                </a>
-              </td>
-            </tr>
-
-            <!-- 粥粥 -->
-            <tr>
-              <td><span class="member-badge">🍚 粥粥</span></td>
-              <td style="color:#444;font-size:12.5px">互联网商分<br>战略</td>
-              <td>
-                <div class="company-tags">
-                  <span class="company-tag hot">美团战投</span>
-                  <span class="company-tag hot">小象</span>
-                  <span class="company-tag hot">快驴</span>
-                  <span class="company-tag">拼多多</span>
-                  <span class="company-tag">滴滴</span>
-                </div>
-              </td>
-              <td>
-                <ol class="action-list">
-                  <li>扫库 + 复捞：系统回溯历史人才库，重点复盘符合画像、过往沟通过及 turndown 人选，分批重新评估推进 <a href="https://docs.xiaohongshu.com/sheet/3ea2a572564ba7cd0b73d71b7b202da6" target="_blank" style="color:#2060C8;font-size:11.5px">📊 25分析岗面试情况</a></li>
-                  <li>内推：持续跟进手上待入职字节人选内推</li>
-                  <li>主动 sourcing：<span class="highlight">重点聚焦小象、快驴和战投</span>，同步覆盖阿里、拼多多、滴滴等战略/商业/经营分析师</li>
-                </ol>
-              </td>
-              <td>
-                <a class="doc-link" href="https://docs.xiaohongshu.com/sheet/b83ca6c8d69387b46809ced1a267c229" target="_blank">
-                  📊 分析攻坚 touching list - 粥粥
-                </a>
-              </td>
-            </tr>
-
-            <!-- 程曦 -->
-            <tr>
-              <td><span class="member-badge">🌟 程曦</span></td>
-              <td style="color:#444;font-size:12.5px">互联网经分<br>商分</td>
-              <td>
-                <div class="company-tags">
-                  <span class="company-tag" style="background:#F0F8FF;border-color:#CCE4FF;color:#2060A0">AI sourcing</span>
-                  <span class="company-tag" style="background:#F0F8FF;border-color:#CCE4FF;color:#2060A0">全网开源</span>
-                </div>
-              </td>
-              <td>
-                <ol class="action-list">
-                  <li>借助 AI 工具深度穷尽式 sourcing</li>
-                  <li>外部人才库开源建联，沉淀可复用 AI 工作流</li>
-                </ol>
-              </td>
-              <td>
-                <div style="display:flex;flex-direction:column;gap:6px">
-                  <a class="doc-link" href="https://analytics-talent-pool-production.up.railway.app/#/" target="_blank">
-                    🤖 外部人才库 sourcing
-                  </a>
-                  <a class="doc-link" href="https://docs.xiaohongshu.com/sheet/b4d43aa5a63efe13e478c0c7c939b18d" target="_blank">
-                    📊 分析岗 tracking list - 程曦
-                  </a>
-                </div>
-              </td>
-            </tr>
-
-          </tbody>
+          <tbody id="src_body"></tbody>
         </table>
       </div>
     </div>
-
   </div>
 
   <!-- ===== TAB 4: Screening 话术 ===== -->
@@ -1222,6 +1097,43 @@
     </div>
   </div>
 
+</div>
+
+<!-- ===== SOURCING MODAL ===== -->
+<div id="src_modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:2000;align-items:center;justify-content:center;">
+  <div style="background:#fff;border-radius:18px;padding:28px 32px;width:580px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+    <h2 id="src_modal_title" style="font-size:17px;font-weight:800;margin-bottom:20px;">✏️ 新增成员</h2>
+    <div style="display:grid;grid-template-columns:80px 1fr;gap:14px;margin-bottom:20px;">
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">Emoji</label>
+        <input type="text" id="sm_emoji" placeholder="☁️" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:16px;font-family:inherit;outline:none;width:100%;text-align:center;">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">成员名称</label>
+        <input type="text" id="sm_name" placeholder="如 云阳" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%;">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;grid-column:1/-1">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">重点方向（换行分隔）</label>
+        <textarea id="sm_direction" placeholder="咨询分析师&#10;证券分析师" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%;height:64px;resize:vertical;"></textarea>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;grid-column:1/-1">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">重点公司（每行一个，结尾加 <code style="background:#F3F4F6;padding:1px 4px;border-radius:3px">(hot)</code> 表示红色高亮）</label>
+        <textarea id="sm_companies" placeholder="MBB咨询(hot)&#10;美团&#10;字节(hot)" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%;height:90px;resize:vertical;"></textarea>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;grid-column:1/-1">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">策略动作（每行一条）</label>
+        <textarea id="sm_actions" placeholder="T1：主动 sourcing 美团商分&#10;T2：内推字节、阿里" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%;height:100px;resize:vertical;"></textarea>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;grid-column:1/-1">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">Tough List 文档（每行一个，格式：<code style="background:#F3F4F6;padding:1px 4px;border-radius:3px">标题 | URL</code>）</label>
+        <textarea id="sm_docs" placeholder="📊 Talent List - 云阳 | https://docs.xiaohongshu.com/..." style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%;height:90px;resize:vertical;"></textarea>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button onclick="srcCloseModal()" style="height:36px;padding:0 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #E5E7EB;background:transparent;color:#6B7280;">取消</button>
+      <button onclick="srcSave()" style="height:36px;padding:0 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#FF2442;color:#fff;">保存</button>
+    </div>
+  </div>
 </div>
 
 <!-- ===== TRACKING MODAL ===== -->
@@ -1573,6 +1485,230 @@
   });
 
   trInit();
+
+  // ======= SOURCING MODULE =======
+  const SRC_KEY = 'analysis_sourcing_v1';
+  const SRC_SEED = [
+    {
+      id: 1, emoji: '☁️', name: '云阳',
+      direction: '咨询分析师\n证券分析师',
+      companies: [
+        {name:'MBB咨询', hot:true}
+      ],
+      actions: [
+        'MBB Generalist / DA / KT — referral',
+        '大小摩、Citi、巴克莱校招触达',
+        'VC referral'
+      ],
+      docs: [
+        {label:'📄 电商财务分析 L1/IC — MBB 招聘策略', url:'https://docs.xiaohongshu.com/doc/57a5eb7d81fc4c6f76799b1517da9522'}
+      ]
+    },
+    {
+      id: 2, emoji: '🐦', name: '玄鸟',
+      direction: '品牌方finance\n其他互联网',
+      companies: [
+        {name:'P&G', hot:true},
+        {name:'Shopee', hot:false},
+        {name:'美团', hot:true}
+      ],
+      actions: [
+        'T1：target 美团商分的人，引导看财分',
+        'T2：看外企 MT'
+      ],
+      docs: [
+        {label:'📊 分析岗 Talent List - 玄鸟', url:'https://docs.xiaohongshu.com/sheet/e9c4818be2c3cff568a6476ea411350a'}
+      ]
+    },
+    {
+      id: 3, emoji: '🚗', name: '车英',
+      direction: '互联网商分\n战略',
+      companies: [
+        {name:'美团 Keeta', hot:true},
+        {name:'美团本地', hot:true},
+        {name:'字节', hot:false},
+        {name:'阿里', hot:false}
+      ],
+      actions: [
+        'T1：主动 sourcing：美团商分（重点关注核心本地商业 + Keeta 巴西/沙特）',
+        'T2：内推：字节、阿里商分/战略',
+        'T3：top 院校（清北复交港大）工作三年内 young hipo 触达建联'
+      ],
+      docs: [
+        {label:'📊 人才库美团商分人选看板', url:'https://cheying072-cmyk.github.io/meituan-talent-dashboard/'}
+      ]
+    },
+    {
+      id: 4, emoji: '🍚', name: '粥粥',
+      direction: '互联网商分\n战略',
+      companies: [
+        {name:'美团战投', hot:true},
+        {name:'小象', hot:true},
+        {name:'快驴', hot:true},
+        {name:'拼多多', hot:false},
+        {name:'滴滴', hot:false}
+      ],
+      actions: [
+        '扫库 + 复捞：系统回溯历史人才库，重点复盘符合画像、过往沟通过及 turndown 人选，分批重新评估推进',
+        '内推：持续跟进手上待入职字节人选内推',
+        '主动 sourcing：重点聚焦小象、快驴和战投，同步覆盖阿里、拼多多、滴滴等战略/商业/经营分析师'
+      ],
+      docs: [
+        {label:'📊 分析攻坚 touching list - 粥粥', url:'https://docs.xiaohongshu.com/sheet/b83ca6c8d69387b46809ced1a267c229'}
+      ]
+    },
+    {
+      id: 5, emoji: '🌟', name: '程曦',
+      direction: '互联网经分\n商分',
+      companies: [
+        {name:'AI sourcing', hot:false},
+        {name:'全网开源', hot:false}
+      ],
+      actions: [
+        '借助 AI 工具深度穷尽式 sourcing',
+        '外部人才库开源建联，沉淀可复用 AI 工作流'
+      ],
+      docs: [
+        {label:'🤖 外部人才库 sourcing', url:'https://analytics-talent-pool-production.up.railway.app/#/'},
+        {label:'📊 分析岗 tracking list - 程曦', url:'https://docs.xiaohongshu.com/sheet/b4d43aa5a63efe13e478c0c7c939b18d'}
+      ]
+    }
+  ];
+
+  let srcData = [], srcEditId = null;
+
+  function srcInit() {
+    const saved = localStorage.getItem(SRC_KEY);
+    if (saved) {
+      try { srcData = JSON.parse(saved); } catch(e) { srcData = JSON.parse(JSON.stringify(SRC_SEED)); }
+    } else {
+      srcData = JSON.parse(JSON.stringify(SRC_SEED));
+      srcPersist(false);
+    }
+    srcRender();
+  }
+
+  function srcPersist(showHint = true) {
+    localStorage.setItem(SRC_KEY, JSON.stringify(srcData));
+    if (showHint) {
+      const el = document.getElementById('src_saved');
+      el.style.opacity = '1';
+      setTimeout(() => el.style.opacity = '0', 1800);
+    }
+  }
+
+  function srcRender() {
+    const tbody = document.getElementById('src_body');
+    if (!srcData.length) {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px;color:#9CA3AF">暂无成员，点击「新增成员」添加</td></tr>';
+      return;
+    }
+    tbody.innerHTML = srcData.map(m => {
+      const companiesHtml = (m.companies||[]).map(c =>
+        `<span class="company-tag${c.hot?' hot':''}">${esc2(c.name)}</span>`
+      ).join('');
+      const actionsHtml = (m.actions||[]).map((a,i) =>
+        `<li>${esc2(a)}</li>`
+      ).join('');
+      const docsHtml = (m.docs||[]).map(d =>
+        `<a class="doc-link" href="${esc2(d.url)}" target="_blank" rel="noopener">${esc2(d.label)}</a>`
+      ).join('');
+      const dirHtml = esc2(m.direction||'').replace(/\n/g,'<br>');
+      return `<tr>
+        <td><span class="member-badge">${esc2(m.emoji||'')} ${esc2(m.name)}</span></td>
+        <td style="color:#444;font-size:12.5px">${dirHtml}</td>
+        <td><div class="company-tags">${companiesHtml}</div></td>
+        <td><ol class="action-list">${actionsHtml}</ol></td>
+        <td><div style="display:flex;flex-direction:column;gap:6px">${docsHtml}</div></td>
+        <td>
+          <button onclick="srcEdit(${m.id})" style="background:none;border:none;cursor:pointer;font-size:14px;padding:3px 5px;border-radius:5px;color:#9CA3AF" title="编辑">✏️</button>
+          <button onclick="srcDelete(${m.id})" style="background:none;border:none;cursor:pointer;font-size:14px;padding:3px 5px;border-radius:5px;color:#9CA3AF" title="删除">🗑️</button>
+        </td>
+      </tr>`;
+    }).join('');
+  }
+
+  function srcShowAdd() {
+    srcEditId = null;
+    document.getElementById('src_modal_title').textContent = '✏️ 新增成员';
+    document.getElementById('sm_emoji').value = '';
+    document.getElementById('sm_name').value = '';
+    document.getElementById('sm_direction').value = '';
+    document.getElementById('sm_companies').value = '';
+    document.getElementById('sm_actions').value = '';
+    document.getElementById('sm_docs').value = '';
+    document.getElementById('src_modal').style.display = 'flex';
+  }
+
+  function srcEdit(id) {
+    const m = srcData.find(d => d.id === id); if (!m) return;
+    srcEditId = id;
+    document.getElementById('src_modal_title').textContent = `✏️ 编辑 · ${m.name}`;
+    document.getElementById('sm_emoji').value = m.emoji || '';
+    document.getElementById('sm_name').value = m.name || '';
+    document.getElementById('sm_direction').value = m.direction || '';
+    // companies: "公司名(hot), 公司名" 格式
+    document.getElementById('sm_companies').value = (m.companies||[]).map(c => c.hot ? c.name+'(hot)' : c.name).join('\n');
+    document.getElementById('sm_actions').value = (m.actions||[]).join('\n');
+    // docs: "标题 | URL" 格式
+    document.getElementById('sm_docs').value = (m.docs||[]).map(d => `${d.label} | ${d.url}`).join('\n');
+    document.getElementById('src_modal').style.display = 'flex';
+  }
+
+  function srcDelete(id) {
+    if (!confirm('确认删除该成员的 sourcing 分工？')) return;
+    srcData = srcData.filter(d => d.id !== id);
+    srcPersist(); srcRender();
+  }
+
+  function srcSave() {
+    const name = document.getElementById('sm_name').value.trim();
+    if (!name) { alert('请填写成员名称'); return; }
+
+    // 解析公司（每行一个，结尾加(hot)表示高亮）
+    const companiesRaw = document.getElementById('sm_companies').value.split('\n').map(s=>s.trim()).filter(Boolean);
+    const companies = companiesRaw.map(s => {
+      const hot = s.endsWith('(hot)');
+      return {name: hot ? s.slice(0,-5).trim() : s, hot};
+    });
+
+    // 解析动作（每行一条）
+    const actions = document.getElementById('sm_actions').value.split('\n').map(s=>s.trim()).filter(Boolean);
+
+    // 解析文档（每行 "标题 | URL"）
+    const docsRaw = document.getElementById('sm_docs').value.split('\n').map(s=>s.trim()).filter(Boolean);
+    const docs = docsRaw.map(s => {
+      const idx = s.indexOf(' | ');
+      if (idx === -1) return {label: s, url: s};
+      return {label: s.slice(0, idx).trim(), url: s.slice(idx+3).trim()};
+    });
+
+    const row = {
+      id: srcEditId !== null ? srcEditId : Date.now(),
+      emoji: document.getElementById('sm_emoji').value.trim(),
+      name, direction: document.getElementById('sm_direction').value.trim(),
+      companies, actions, docs
+    };
+
+    if (srcEditId !== null) {
+      const i = srcData.findIndex(d => d.id === srcEditId);
+      if (i !== -1) srcData[i] = row;
+    } else {
+      srcData.push(row);
+    }
+    srcPersist(); srcCloseModal(); srcRender();
+  }
+
+  function srcCloseModal() {
+    document.getElementById('src_modal').style.display = 'none';
+    srcEditId = null;
+  }
+
+  document.getElementById('src_modal').addEventListener('click', function(e) {
+    if (e.target === this) srcCloseModal();
+  });
+
+  srcInit();
 </script>
 
 </body>
