@@ -1295,6 +1295,10 @@
         <input type="text" id="tm_position" placeholder="如 财分-fp&a-潇潇 / open" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%">
       </div>
       <div style="display:flex;flex-direction:column;gap:5px;grid-column:1/-1">
+        <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">候选人链接（HR人才库）</label>
+        <input type="text" id="tm_url" placeholder="https://hr.xiaohongshu.com/applicant-view/..." style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;grid-column:1/-1">
         <label style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px">备注</label>
         <textarea id="tm_remark" placeholder="学校背景、经历等" style="border:1px solid #E5E7EB;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;outline:none;width:100%;height:72px;resize:vertical;"></textarea>
       </div>
@@ -1317,54 +1321,54 @@
   // ======= TRACKING MODULE =======
   const TR_KEY = 'analysis_tracking_v2';
   const TR_SEED = [
-    {week:"W1",name:"巩婕",level:"IC",position:"open",status:"TA面试fail",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"百度",birth_year:"1996",remark:"北大，百度商分",ta:"玄鸟"},
-    {week:"W1",name:"李玉娇",level:"IC",position:"策略中台 -经分- 仪玄",status:"offer沟通中",ta_interview:"pass",screening:"pass",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"腾讯",birth_year:"1999",remark:"清华，腾讯商分",ta:"玄鸟"},
-    {week:"W1",name:"陈晓滨",level:"IC",position:"open",status:"待观影",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1996",remark:"南大，美团商分",ta:"玄鸟"},
-    {week:"W1",name:"左正浩",level:"IC",position:"财分-fp&a-潇潇",status:"offer沟通中",ta_interview:"pass",screening:"pass",hrbp_interview:"",l1l2_interview:"pass",talent_type:"投资+美团keeta+美团本地",company:"滴滴",birth_year:"1999",remark:"北大+芝加哥，滴滴战略分析",ta:"粥粥"},
-    {week:"W1",name:"刘欣然",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"百度",birth_year:"2000",remark:"哥伦比亚，百度战略分析",ta:"粥粥"},
-    {week:"W1",name:"张辰悦",level:"IC",position:"策略中台 - 经分 - 汇报绯夏",status:"人选拒绝",ta_interview:"pass",screening:"pass",hrbp_interview:"pass",l1l2_interview:"pass",talent_type:"投资+美团keeta+美团本地",company:"美团",birth_year:"2000",remark:"复旦+复旦，美团商分",ta:"车英"},
-    {week:"W1",name:"Ashley - Confidential",level:"L2",position:"分析or业务",status:"HRBP面试",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1990",remark:"清华，巴克莱 - 美团商分",ta:"云阳"},
-    {week:"W1",name:"任志勇",level:"L1",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1989",remark:"天大南开，美团",ta:"云阳"},
-    {week:"W1",name:"沈圆圆",level:"IC",position:"open",status:"待观影",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1999",remark:"上财 - 清华，美团商分",ta:"云阳"},
-    {week:"W1",name:"杨逸嘉",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1998",remark:"ASU - 美团商分",ta:"云阳"},
-    {week:"W1",name:"陈增琦",level:"IC",position:"open",status:"观影fail",ta_interview:"pass",screening:"fail",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"平安",birth_year:"2001",remark:"人大-波士顿，平安总部经分",ta:"程曦"},
-    {week:"W2",name:"汪清岚",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"2000",remark:"对外经贸，美团商分",ta:"玄鸟"},
-    {week:"W2",name:"李廷宇",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"安可创新",birth_year:"2000",remark:"深圳大学+新南威尔士硕，安可创新数分",ta:"粥粥"},
-    {week:"W2",name:"李孟达",level:"IC",position:"open",status:"人选拒绝",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"倍嵘资本",birth_year:"2000",remark:"清华本硕，倍嵘资本投资分析",ta:"粥粥"},
-    {week:"W2",name:"孙珺哲",level:"IC",position:"open",status:"人选拒绝",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"中银",birth_year:"1999",remark:"康奈尔本硕",ta:"粥粥"},
-    {week:"W2",name:"詹淳霖",level:"IC",position:"open",status:"人选拒绝",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"摩根大通",birth_year:"2000",remark:"港大，摩根大通投资分析",ta:"粥粥"},
-    {week:"W2",name:"樊佳颖",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"2001",remark:"重庆大学-哥伦比亚硕，美团商分",ta:"程曦"},
-    {week:"W2",name:"王译晗",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"微众银行",birth_year:"1998",remark:"天大-清华，微众银行数分",ta:"程曦"},
-    {week:"W2",name:"孙绮卉",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"久谦咨询",birth_year:"1997",remark:"加州大学本+哥伦比亚硕，九谦咨询",ta:"程曦"},
-    {week:"W2",name:"张净沿",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"蚂蚁",birth_year:"1999",remark:"川大本，滴滴+蚂蚁数分",ta:"程曦"},
-    {week:"W2",name:"段语轩",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"2001",remark:"复旦+港大，美团商分",ta:"车英"},
-    {week:"W2",name:"董乐斌",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"BCG",birth_year:"2000",remark:"人大+清华，BCG",ta:"车英"},
-    {week:"W3",name:"刘思迪",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"字节",birth_year:"1998",remark:"Emory+Emory，字节",ta:"车英"},
-    {week:"W3",name:"吕晗旗",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1999",remark:"Berkeley+Columbia，美团",ta:"车英"},
-    {week:"W3",name:"王艺涵",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1999",remark:"北大+UCL，美团",ta:"车英"},
-    {week:"W2",name:"张瑾瑜",level:"IC",position:"open",status:"待TA面试",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"中金",birth_year:"1998",remark:"复旦+LSE，中金",ta:"车英"},
-    {week:"W3",name:"刘祖瑞",level:"IC",position:"open",status:"待TA面试",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"2000",remark:"清华，美团",ta:"车英"},
-    {week:"W2",name:"杨明烜",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"Amgen",birth_year:"2000",remark:"同济+Brown，Amgen",ta:"车英"},
-    {week:"W2",name:"王悦",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"华夏久盈",birth_year:"2001",remark:"央财+耶鲁，华夏久盈",ta:"车英"},
-    {week:"W2",name:"郝天一",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"国开金融",birth_year:"1997",remark:"北航，清华 - 国开金融VC",ta:"云阳"},
-    {week:"W3",name:"曹妍",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1998",remark:"山大+港中深，美团",ta:"车英"},
-    {week:"W3",name:"郭乐嘉",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"锴明投资",birth_year:"2000",remark:"清华+LSE，锴明投资",ta:"车英"},
-    {week:"W3",name:"张夕瑶",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"蚂蚁",birth_year:"1999",remark:"中山+复旦，蚂蚁",ta:"车英"},
-    {week:"W3",name:"李奕辰",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"滴滴",birth_year:"1998",remark:"西安交大+JHU+UPenn，滴滴",ta:"车英"},
-    {week:"W3",name:"黄海昀",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"摩根大通",birth_year:"1998",remark:"交大+交大，摩根大通",ta:"车英"},
-    {week:"W3",name:"易家阳",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"阿里云",birth_year:"2000",remark:"上财本硕",ta:"程曦"},
-    {week:"W3",name:"伍嘉祺",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"滴滴",birth_year:"2001",remark:"哥大+NYU",ta:"程曦"},
-    {week:"W3",name:"王艳影",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"2000",remark:"中国海洋大学+华盛顿",ta:"程曦"},
-    {week:"W3",name:"隆军德",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"东方财富证券",birth_year:"1999",remark:"华科+新国立",ta:"程曦"},
-    {week:"W3",name:"殷子彧",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"阿里云",birth_year:"2000",remark:"华科+交大",ta:"程曦"},
-    {week:"W3",name:"岳晓娟",level:"IC",position:"open",status:"待TA面试",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"阿里",birth_year:"1997",remark:"华南理工+中南财",ta:"程曦"},
-    {week:"W3",name:"许寒初",level:"IC/L1",position:"open",status:"待TA面试",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"久谦+欢聚时代",birth_year:"1996",remark:"交大",ta:"程曦"},
-    {week:"W3",name:"张珈启",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"SHEIN",birth_year:"1998",remark:"南开+北大",ta:"粥粥"},
-    {week:"W3",name:"戴丽娜",level:"IC",position:"open",status:"待TA面试",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1998",remark:"浙大+人大",ta:"粥粥"},
-    {week:"W3",name:"王艺",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1998",remark:"广州大学+曼彻斯特",ta:"粥粥"},
-    {week:"W3",name:"任丛",level:"L1",position:"分析or solution",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"翊翎+泰和+品牌方",birth_year:"1993",remark:"对外经贸本硕+巴黎高商",ta:"粥粥"},
-    {week:"W3",name:"朱凯成",level:"IC",position:"open",status:"待TA面试",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"2001",remark:"央财+港大",ta:"粥粥"},
-    {week:"W3",name:"胡雪岚",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"2001",remark:"杜伦+香港科技",ta:"粥粥"}
+    {week:"W1",name:"巩婕",level:"IC",position:"open",status:"TA面试fail",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"百度",birth_year:"1996",remark:"北大，百度商分",ta:"玄鸟",url:"https://hr.xiaohongshu.com/applicant-evaluation?talentId=922633&interviewId=6026916&interviewScheduleId=684754"},
+    {week:"W1",name:"李玉娇",level:"IC",position:"策略中台 -经分- 仪玄",status:"offer沟通中",ta_interview:"pass",screening:"pass",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"腾讯",birth_year:"1999",remark:"清华，腾讯商分",ta:"玄鸟",url:"https://hr.xiaohongshu.com/applicant-evaluation?talentId=2445020&interviewId=6173661&interviewScheduleId=684294"},
+    {week:"W1",name:"陈晓滨",level:"IC",position:"open",status:"待观影",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1996",remark:"南大，美团商分",ta:"玄鸟",url:"https://hr.xiaohongshu.com/applicant-view/1136676/6172278/resume"},
+    {week:"W1",name:"左正浩",level:"IC",position:"财分-fp&a-潇潇",status:"offer沟通中",ta_interview:"pass",screening:"pass",hrbp_interview:"",l1l2_interview:"pass",talent_type:"投资+美团keeta+美团本地",company:"滴滴",birth_year:"1999",remark:"北大+芝加哥，滴滴战略分析",ta:"粥粥",url:"https://hr.xiaohongshu.com/applicant-view/2262672/6231383/resume"},
+    {week:"W1",name:"刘欣然",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"百度",birth_year:"2000",remark:"哥伦比亚，百度战略分析",ta:"粥粥",url:"https://hr.xiaohongshu.com/applicant-view/1187596/6293809/resume"},
+    {week:"W1",name:"张辰悦",level:"IC",position:"策略中台 - 经分 - 汇报绯夏",status:"人选拒绝",ta_interview:"pass",screening:"pass",hrbp_interview:"pass",l1l2_interview:"pass",talent_type:"投资+美团keeta+美团本地",company:"美团",birth_year:"2000",remark:"复旦+复旦，美团商分",ta:"车英",url:"https://hr.xiaohongshu.com/applicant-evaluation?talentId=1822446&interviewId=6282316&interviewScheduleId=687453"},
+    {week:"W1",name:"Ashley - Confidential",level:"L2",position:"分析or业务",status:"HRBP面试",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1990",remark:"清华，巴克莱 - 美团商分",ta:"云阳",url:""},
+    {week:"W1",name:"任志勇",level:"L1",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1989",remark:"天大南开，美团",ta:"云阳",url:"https://hr.xiaohongshu.com/applicant-view/2457799/6237742/resume"},
+    {week:"W1",name:"沈圆圆",level:"IC",position:"open",status:"待观影",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1999",remark:"上财 - 清华，美团商分",ta:"云阳",url:"https://hr.xiaohongshu.com/applicant-view/2391283/6015529/history"},
+    {week:"W1",name:"杨逸嘉",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1998",remark:"ASU - 美团商分",ta:"云阳",url:"https://hr.xiaohongshu.com/applicant-view/906087/6217289/resume"},
+    {week:"W1",name:"陈增琦",level:"IC",position:"open",status:"观影fail",ta_interview:"pass",screening:"fail",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"平安",birth_year:"2001",remark:"人大-波士顿，平安总部经分",ta:"程曦",url:"https://hr.xiaohongshu.com/applicant-view/2432212/6236726/resume"},
+    {week:"W2",name:"汪清岚",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"2000",remark:"对外经贸，美团商分",ta:"玄鸟",url:"https://hr.xiaohongshu.com/applicant-evaluation?talentId=2459099&interviewId=6244806&interviewScheduleId=686415"},
+    {week:"W2",name:"李廷宇",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"安可创新",birth_year:"2000",remark:"深圳大学+新南威尔士硕，安可创新数分",ta:"粥粥",url:"https://hr.xiaohongshu.com/applicant-view/2036765/6334432/resume"},
+    {week:"W2",name:"李孟达",level:"IC",position:"open",status:"人选拒绝",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"倍嵘资本",birth_year:"2000",remark:"清华本硕，倍嵘资本投资分析",ta:"粥粥",url:"https://hr.xiaohongshu.com/applicant-view/2329836/6433808/resume"},
+    {week:"W2",name:"孙珺哲",level:"IC",position:"open",status:"人选拒绝",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"中银",birth_year:"1999",remark:"康奈尔本硕",ta:"粥粥",url:"https://hr.xiaohongshu.com/applicant-view/2097852/6433928/resume"},
+    {week:"W2",name:"詹淳霖",level:"IC",position:"open",status:"人选拒绝",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"摩根大通",birth_year:"2000",remark:"港大，摩根大通投资分析",ta:"粥粥",url:"https://hr.xiaohongshu.com/applicant-view/2399633/6433723/resume"},
+    {week:"W2",name:"樊佳颖",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"2001",remark:"重庆大学-哥伦比亚硕，美团商分",ta:"程曦",url:"https://hr.xiaohongshu.com/applicant-view/1052307/6384518/resume"},
+    {week:"W2",name:"王译晗",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"微众银行",birth_year:"1998",remark:"天大-清华，微众银行数分",ta:"程曦",url:"https://hr.xiaohongshu.com/applicant-view/2487915/6391462/resume"},
+    {week:"W2",name:"孙绮卉",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"久谦咨询",birth_year:"1997",remark:"加州大学本+哥伦比亚硕，九谦咨询",ta:"程曦",url:"https://hr.xiaohongshu.com/applicant-view/1341948/6286686/history"},
+    {week:"W2",name:"张净沿",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"蚂蚁",birth_year:"1999",remark:"川大本，滴滴+蚂蚁数分",ta:"程曦",url:"https://hr.xiaohongshu.com/applicant-view/666960/6337240/resume"},
+    {week:"W2",name:"段语轩",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"2001",remark:"复旦+港大，美团商分",ta:"车英",url:"https://hr.xiaohongshu.com/applicant-view/1471926/6334497/resume"},
+    {week:"W2",name:"董乐斌",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"BCG",birth_year:"2000",remark:"人大+清华，BCG",ta:"车英",url:"https://hr.xiaohongshu.com/applicant-view/2495521/6433943/resume"},
+    {week:"W3",name:"刘思迪",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"字节",birth_year:"1998",remark:"Emory+Emory，字节",ta:"车英",url:"https://hr.xiaohongshu.com/applicant-view/2122554/6434150/resume"},
+    {week:"W3",name:"吕晗旗",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1999",remark:"Berkeley+Columbia，美团",ta:"车英",url:"https://hr.xiaohongshu.com/applicant-evaluation?talentId=1401263&interviewId=6489748&interviewScheduleId=697170"},
+    {week:"W3",name:"王艺涵",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1999",remark:"北大+UCL，美团",ta:"车英",url:"https://hr.xiaohongshu.com/applicant-view/2053305/6297629/resume"},
+    {week:"W2",name:"张瑾瑜",level:"IC",position:"open",status:"待TA面试",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"中金",birth_year:"1998",remark:"复旦+LSE，中金",ta:"车英",url:"https://hr.xiaohongshu.com/applicant-view/2060921/6417507/resume"},
+    {week:"W3",name:"刘祖瑞",level:"IC",position:"open",status:"待TA面试",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"2000",remark:"清华，美团",ta:"车英",url:"https://hr.xiaohongshu.com/applicant-view/1873702/6469037/resume"},
+    {week:"W2",name:"杨明烜",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"Amgen",birth_year:"2000",remark:"同济+Brown，Amgen",ta:"车英",url:"https://hr.xiaohongshu.com/applicant-view/2058427/6404500/resume"},
+    {week:"W2",name:"王悦",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"华夏久盈",birth_year:"2001",remark:"央财+耶鲁，华夏久盈",ta:"车英",url:"https://hr.xiaohongshu.com/applicant-view/2493057/6420253/resume"},
+    {week:"W2",name:"郝天一",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"国开金融",birth_year:"1997",remark:"北航，清华 - 国开金融VC",ta:"云阳",url:"https://hr.xiaohongshu.com/applicant-view/2468647/6294151/resume"},
+    {week:"W3",name:"曹妍",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1998",remark:"山大+港中深，美团",ta:"车英",url:"https://hr.xiaohongshu.com/applicant-view/797158/6469108/resume"},
+    {week:"W3",name:"郭乐嘉",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"锴明投资",birth_year:"2000",remark:"清华+LSE，锴明投资",ta:"车英",url:"https://hr.xiaohongshu.com/applicant-view/1557454/6427366/resume"},
+    {week:"W3",name:"张夕瑶",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"蚂蚁",birth_year:"1999",remark:"中山+复旦，蚂蚁",ta:"车英",url:"https://hr.xiaohongshu.com/applicant-view/2324664/6418982/resume"},
+    {week:"W3",name:"李奕辰",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"滴滴",birth_year:"1998",remark:"西安交大+JHU+UPenn，滴滴",ta:"车英",url:"https://hr.xiaohongshu.com/applicant-view/1418733/6417435/resume"},
+    {week:"W3",name:"黄海昀",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"摩根大通",birth_year:"1998",remark:"交大+交大，摩根大通",ta:"车英",url:"https://hr.xiaohongshu.com/applicant-view/567250/6414256/resume"},
+    {week:"W3",name:"易家阳",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"阿里云",birth_year:"2000",remark:"上财本硕",ta:"程曦",url:"https://hr.xiaohongshu.com/applicant-view/1438480/6414202/resume"},
+    {week:"W3",name:"伍嘉祺",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"滴滴",birth_year:"2001",remark:"哥大+NYU",ta:"程曦",url:"https://hr.xiaohongshu.com/applicant-view/1723835/6430929/resume"},
+    {week:"W3",name:"王艳影",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"2000",remark:"中国海洋大学+华盛顿",ta:"程曦",url:"https://hr.xiaohongshu.com/applicant-view/2494961/6431107/resume"},
+    {week:"W3",name:"隆军德",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"东方财富证券",birth_year:"1999",remark:"华科+新国立",ta:"程曦",url:"https://hr.xiaohongshu.com/applicant-view/2417886/6467974/resume"},
+    {week:"W3",name:"殷子彧",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"阿里云",birth_year:"2000",remark:"华科+交大",ta:"程曦",url:"https://hr.xiaohongshu.com/applicant-view/1857392/6470406/resume"},
+    {week:"W3",name:"岳晓娟",level:"IC",position:"open",status:"待TA面试",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"阿里",birth_year:"1997",remark:"华南理工+中南财",ta:"程曦",url:"https://hr.xiaohongshu.com/applicant-view/2307147/6511598/history"},
+    {week:"W3",name:"许寒初",level:"IC/L1",position:"open",status:"待TA面试",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"久谦+欢聚时代",birth_year:"1996",remark:"交大",ta:"程曦",url:"https://hr.xiaohongshu.com/applicant-view/2487652/6515241/resume"},
+    {week:"W3",name:"张珈启",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"SHEIN",birth_year:"1998",remark:"南开+北大",ta:"粥粥",url:"https://hr.xiaohongshu.com/applicant-view/1699804/6511398/resume"},
+    {week:"W3",name:"戴丽娜",level:"IC",position:"open",status:"待TA面试",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1998",remark:"浙大+人大",ta:"粥粥",url:"https://hr.xiaohongshu.com/applicant-view/1472191/6497535/resume"},
+    {week:"W3",name:"王艺",level:"IC",position:"open",status:"待观影",ta_interview:"pass",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"1998",remark:"广州大学+曼彻斯特",ta:"粥粥",url:"https://hr.xiaohongshu.com/applicant-view/790739/6509479/resume"},
+    {week:"W3",name:"任丛",level:"L1",position:"分析or solution",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"翊翎+泰和+品牌方",birth_year:"1993",remark:"对外经贸本硕+巴黎高商",ta:"粥粥",url:"https://hr.xiaohongshu.com/applicant-view/2498489/6449634/resume"},
+    {week:"W3",name:"朱凯成",level:"IC",position:"open",status:"待TA面试",ta_interview:"",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"2001",remark:"央财+港大",ta:"粥粥",url:""},
+    {week:"W3",name:"胡雪岚",level:"IC",position:"open",status:"TA面试fail",ta_interview:"fail",screening:"",hrbp_interview:"",l1l2_interview:"",talent_type:"",company:"美团",birth_year:"2001",remark:"杜伦+香港科技",ta:"粥粥",url:"https://hr.xiaohongshu.com/applicant-view/1779062/6494155/resume"}
   ];
 
   let trData = [], trFiltered = [], trEditId = null, trSortCol = 'week', trSortDir = 1;
@@ -1437,7 +1441,7 @@
       const tc = trTaColor(r.ta);
       return `<tr style="border-bottom:1px solid #F3F4F6;transition:background .1s" onmouseover="this.style.background='#FFFBF9'" onmouseout="this.style.background=''">
         <td style="padding:10px 12px"><span style="display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;background:#F3F4F6;color:#6B7280">${esc2(r.week)}</span></td>
-        <td style="padding:10px 12px"><strong>${esc2(r.name)}</strong></td>
+        <td style="padding:10px 12px">${r.url ? `<a href="${esc2(r.url)}" target="_blank" rel="noopener" style="font-weight:700;color:#FF2442;text-decoration:none;border-bottom:1.5px solid rgba(255,36,66,0.25);padding-bottom:1px;transition:border-color .15s" onmouseover="this.style.borderColor='#FF2442'" onmouseout="this.style.borderColor='rgba(255,36,66,0.25)'">${esc2(r.name)}</a>` : `<strong>${esc2(r.name)}</strong>`}</td>
         <td style="padding:10px 12px;font-size:11px;font-weight:600;color:#555">${esc2(r.level)}</td>
         <td style="padding:10px 12px">${esc2(r.company)}</td>
         <td style="padding:10px 12px;font-size:12px;color:#9CA3AF">${esc2(r.birth_year)}</td>
@@ -1489,7 +1493,7 @@
   function trShowAdd() {
     trEditId = null;
     document.getElementById('tr_modal_title').textContent = '✏️ 新增人选';
-    ['tm_week','tm_name','tm_level','tm_company','tm_birth','tm_ta','tm_status','tm_ta_i','tm_screen','tm_hrbp','tm_l1l2','tm_position','tm_remark'].forEach(id => {
+    ['tm_week','tm_name','tm_level','tm_company','tm_birth','tm_ta','tm_status','tm_ta_i','tm_screen','tm_hrbp','tm_l1l2','tm_position','tm_url','tm_remark'].forEach(id => {
       const el = document.getElementById(id);
       if (el.tagName === 'SELECT') el.selectedIndex = 0; else el.value = '';
     });
@@ -1512,6 +1516,7 @@
     document.getElementById('tm_hrbp').value = r.hrbp_interview;
     document.getElementById('tm_l1l2').value = r.l1l2_interview;
     document.getElementById('tm_position').value = r.position;
+    document.getElementById('tm_url').value = r.url || '';
     document.getElementById('tm_remark').value = r.remark;
     document.getElementById('tr_modal').style.display = 'flex';
   }
@@ -1539,6 +1544,7 @@
       hrbp_interview: document.getElementById('tm_hrbp').value,
       l1l2_interview: document.getElementById('tm_l1l2').value,
       position: document.getElementById('tm_position').value || 'open',
+      url: document.getElementById('tm_url').value.trim(),
       remark: document.getElementById('tm_remark').value,
       talent_type: ''
     };
